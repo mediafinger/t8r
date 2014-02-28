@@ -1,0 +1,10 @@
+/ ### Begin of partial shared/_metahead.html.haml ###
+%meta(charset="utf-8")
+%title= content_for?(:title) ? yield(:title) : I18n.t('pages.home')
+= csrf_meta_tags
+
+/ JavaScript placed at the end of the document so the pages load faster does break shit - why??
+= javascript_include_tag "application", "data-turbolinks-track" => true
+
+/ Include styles
+= stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true

@@ -1,0 +1,9 @@
+/ ### Begin of partial shared/_nav.html.haml ###
+
+.navbar
+  %ul.nav
+    %li= link_to I18n.t('pages.untranslated'),     root_path
+    %li= link_to I18n.t('pages.new_ressource'),    root_path
+    %li= link_to I18n.t('pages.all'),              root_path
+  %ul.nav.pull-right
+    %li= link_to I18n.t('pages.home'),             root_path

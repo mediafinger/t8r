@@ -1,0 +1,20 @@
+!!! 5
+%html(lang="en")
+  %head
+    = render 'layouts/metahead'
+
+  %body
+    = render 'layouts/nav'
+
+    .container
+      .row
+        .span12
+          %p
+            - flash.each do |key, value|
+              = content_tag(:div, value, :class => "round flash #{key}")
+
+          %main
+            = yield
+
+    %foot
+      = render 'layouts/footer'

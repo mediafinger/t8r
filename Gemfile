@@ -8,7 +8,7 @@ gem 'puma',                         '~> 2.7'
 gem 'rails',                        '= 4.0.3'
 gem 'pg',                           '~> 0.17'
 
-# gem 'bootstrap-sass',               '–> 3.0'
+gem 'bootstrap-sass',               '~> 3.1.1'
 gem 'coffee-rails',                 '~> 4.0'
 gem 'haml-rails',                   '~> 0.5'
 gem 'sass-rails',                   '~> 4.0.0'
