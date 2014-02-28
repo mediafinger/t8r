@@ -1,0 +1,33 @@
+postgresql: &postgresql
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV['T8R_DB_USERNAME_POSTGRES'] %>
+  password: <%= ENV['T8R_DB_PASSWORD_POSTGRES'] %>
+
+defaults: &defaults
+  pool: 16
+  # timeout: 3000
+  # host: localhost
+  #port: 5432
+  <<: *postgresql
+
+development:
+  database: t8r_development
+  min_messages: error
+  <<: *defaults
+
+test:
+  database: t8r_test
+  min_messages: log
+  <<: *defaults
+
+production:
+  database: t8r_production
+  min_messages: warning
+  <<: *defaults
+
+# Minimum log levels, in increasing order:
+#   debug5, debug4, debug3, debug2, debug1,
+#   log, notice, warning, error, fatal, and panic
+# Defaults to warning.
+#min_messages: notice
