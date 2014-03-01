@@ -2,7 +2,7 @@ class Phrase < ActiveRecord::Base
   belongs_to  :app
   has_many    :translations,  dependent: :destroy
 
-  before_validation(on: :create) { self.key = self.key.to_s.parameterize.underscore.to_sym }
+  before_validation  { self.key = self.key.to_s.parameterize.underscore.to_sym }
   validates :app_id, presence: true
   validates :key,    presence: true,  uniqueness: { scope: :app }
 
@@ -10,8 +10,6 @@ class Phrase < ActiveRecord::Base
   after_update :update_translations
 
   scope :default_order,       -> { order(key: :asc) }
-  scope :untranslated,        -> { joins(:translations).where("translations.done = FALSE") }
-  scope :untranslated_count,  -> { untranslated.count }
 
   def untranslated
     translations.joins(:locale).where(done: false)
