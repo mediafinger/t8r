@@ -15,8 +15,21 @@ td, th {
   clear: both;
 }
 
-.round {
-  -moz-border-radius:     1em;
-  -webkit-border-radius:  1em;
-  border-radius:          1em;
+@mixin border-radius($radius) {
+  -moz-border-radius:     $radius;
+  -webkit-border-radius:  $radius;
+  border-radius:          $radius;
+}
+
+.translated {
+  margin: 0 2px 0 2px;
+  padding: 0 2px 0 2px;
+}
+
+.untranslated {
+  @include border-radius(1em);
+
+  background-color: #FFD0D0;
+  margin: 0 2px 0 2px;
+  padding: 0 2px 0 2px;
 }
