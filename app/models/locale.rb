@@ -29,4 +29,7 @@ class Locale < ActiveRecord::Base
     end
   end
 
+  def to_json(options = {})
+    { app: app.key, name: name, key: key }.to_json
+  end
 end

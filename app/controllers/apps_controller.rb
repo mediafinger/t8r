@@ -1,5 +1,5 @@
 class AppsController < BaseController
-  respond_to    :html
+  respond_to  :html, :json
 
   # index   inherited from BaseController
   # show    inherited from BaseController
@@ -7,6 +7,7 @@ class AppsController < BaseController
   # create  inherited from BaseController
   # edit    inherited from BaseController
   # update  inherited from BaseController
+
 
   private
 

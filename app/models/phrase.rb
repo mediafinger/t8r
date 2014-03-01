@@ -35,4 +35,8 @@ class Phrase < ActiveRecord::Base
       t.update_attributes!(done: false) if t.done
     end
   end
+
+  def to_json(options = {})
+    { app: app.key, key: key, value: value, hint: hint }.to_json
+  end
 end

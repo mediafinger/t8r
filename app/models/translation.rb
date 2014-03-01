@@ -21,8 +21,8 @@ class Translation < ActiveRecord::Base
     "#{app.key}.#{locale.key}.#{phrase.key} = #{value}"
   end
 
-  def to_json
-    { app: app.key, locale: locale.key, phrase: phrase.key, value: value }.to_json
+  def to_json(options = {})
+    { app: app.key, locale: locale.key, phrase: phrase.key, value: value, done: done }.to_json
   end
 
   def to_s
