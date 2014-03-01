@@ -3,8 +3,9 @@
 .navbar
   %ul.nav
     %li= link_to I18n.t('pages.apps'),           apps_path
-    / %li= link_to I18n.t('pages.locales'),        app_locales_path
-    / %li= link_to I18n.t('pages.phrases'),        app_phrases_path
-    / %li= link_to I18n.t('pages.translations'),   app_translations_path
+    - if @app.present?
+      %li= link_to I18n.t('pages.locales'),        app_locales_path(@app)
+      %li= link_to I18n.t('pages.phrases'),        app_phrases_path(@app)
+      %li= link_to I18n.t('pages.translations'),   app_translations_path(@app)
   %ul.nav.pull-right
     %li= link_to I18n.t('pages.home'),           root_path
