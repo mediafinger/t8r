@@ -1,0 +1,23 @@
+language: ruby
+rvm:
+  - ruby-2.1.1
+gemfile: Gemfile
+bundler_args: "--without development production"
+
+env:
+  - DB=postgresql
+
+# matrix:
+#   allow_failures:
+#     - rvm: ruby-1.9.3
+
+before_script:
+  - psql -c 'create database t8r_test' -U postgres
+  - "bundle exec rake db:migrate"
+  - "bundle exec rake db:test:prepare"
+
+script: "rake"
+
+branches:
+  only:
+    - master
