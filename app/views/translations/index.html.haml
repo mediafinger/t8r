@@ -1,0 +1,19 @@
+%h1 Listing translations [T]
+
+%table
+  %tr
+    %th Key [T]
+    %th Locale [T]
+    %th Value [T]
+    %th Done [T]
+    %th
+    %th
+
+  - @translations.each do |translation|
+    %tr
+      %td= translation.phrase.key
+      %td= translation.locale.key
+      %td= translation.value
+      %td= translation.done
+      %td= link_to 'Show [T]', app_translation_path(@app, @translation)
+      %td= link_to 'Edit [T]', edit_app_translation_path(@app, translation)

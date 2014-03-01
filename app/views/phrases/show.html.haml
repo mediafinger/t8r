@@ -1,0 +1,16 @@
+%p
+  %strong App: [T]
+  = "#{@app.key} / #{@app.name}"
+%p
+  %strong Key: [T]
+  = @phrase.key
+%p
+  %strong Value: [T]
+  = @phrase.value
+%p
+  %strong Hint: [T]
+  = @phrase.hint
+
+= link_to 'Edit [T]', edit_app_phrase_path(@app, @phrase)
+\|
+= link_to 'Back [T]', app_phrases_path(@app)

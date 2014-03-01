@@ -1,0 +1,35 @@
+= form_for [@app, phrase] do |f|
+  - if phrase.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(phrase.errors.count, "error")} prohibited this phrase from being saved: [T]"
+      %ul
+        - phrase.errors.full_messages.each do |msg|
+          %li= msg
+
+  - if phrase.new_record?
+    .field
+      %h3= "#{@app.key} / #{@app.name}"
+      = f.hidden_field :app_id, :value => @app.id
+  - else
+    .field
+      %h3= "#{@app.key} / #{@app.name}"
+
+  - if phrase.new_record?
+    .field
+      = f.label :key
+      = f.text_field :key
+  - else
+    .field
+      %h3= "#{phrase.key}"
+
+  .field
+    = f.label :value
+    = f.text_field :value
+
+  .field
+    = f.label :hint
+    = f.text_field :hint
+
+
+  .actions
+    = f.submit 'Save [T]'

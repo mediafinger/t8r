@@ -1,0 +1,7 @@
+%h1 Editing translation [T]
+
+= render 'form', :translation => @translation
+
+= link_to 'Show [T]', app_translation_path(@app, @translation)
+\|
+= link_to 'Back [T]', app_translations_path(@translation.app)

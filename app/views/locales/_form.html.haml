@@ -1,0 +1,30 @@
+= form_for [@app, locale] do |f|
+  - if locale.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(locale.errors.count, "error")} prohibited this locale from being saved: [T]"
+      %ul
+        - locale.errors.full_messages.each do |msg|
+          %li= msg
+
+  - if locale.new_record?
+    .field
+      %h3= "#{@app.key} / #{@app.name}"
+      = f.hidden_field :app_id, :value => @app.id
+  - else
+    .field
+      %h3= "#{@app.key} / #{@app.name}"
+
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  - if locale.new_record?
+    .field
+      = f.label :key
+      = f.text_field :key
+  - else
+    .field
+      %h3= "#{locale.key}"
+
+  .actions
+    = f.submit 'Save [T]'

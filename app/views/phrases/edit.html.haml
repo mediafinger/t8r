@@ -1,0 +1,7 @@
+%h1 Editing phrase [T]
+
+= render 'form', :phrase => @phrase
+
+= link_to 'Show [T]', app_phrase_path(@app, @phrase)
+\|
+= link_to 'Back [T]', app_phrases_path(@app)

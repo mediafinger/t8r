@@ -1,0 +1,7 @@
+%h1 Editing locale [T]
+
+= render 'form', :locale => @locale
+
+= link_to 'Show [T]', app_locale_path(@app, @locale)
+\|
+= link_to 'Back [T]', app_locales_path(@app)

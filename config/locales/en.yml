@@ -4,6 +4,14 @@
 en:
   pages:
     all: Browse all ressources
+    apps: Apps
     home: T8r
-    new_ressource: Create new new_ressource
-    untranslated: Not translated yet
+    locales: Locales
+    phrases: Phrases
+    translations: Translations
+  shared:
+    delete: Delete
+  views:
+    select_app: Select the app
+    select_locale: Select the locale
+    select_phrase: Select the phrase

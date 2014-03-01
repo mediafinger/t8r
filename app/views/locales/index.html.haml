@@ -1,0 +1,21 @@
+%h1 Listing locales [T]
+
+%table
+  %tr
+    %th Name [T]
+    %th Key [T]
+    %th
+    %th
+    %th Add Phrase [T]
+
+  - @locales.each do |locale|
+    %tr
+      %td= locale.name
+      %td= locale.key
+      %td= link_to 'Show [T]', app_locale_path(@app, locale)
+      %td= link_to 'Edit [T]', edit_app_locale_path(@app, locale)
+      %td= link_to 'Add Phrase [T]', new_app_phrase_path(@app)
+
+%br
+
+%p= link_to "New locale [T]", new_app_locale_path(@app)

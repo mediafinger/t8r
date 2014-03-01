@@ -1,0 +1,13 @@
+%p
+  %strong App: [T]
+  = "#{@app.key} / #{@app.name}"
+%p
+  %strong Name: [T]
+  = @locale.name
+%p
+  %strong Key: [T]
+  = @locale.key
+
+= link_to 'Edit [T]', edit_app_locale_path(@app, @locale)
+\|
+= link_to 'Back [T]', app_locales_path(@app)
