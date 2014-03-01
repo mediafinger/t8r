@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20140228224609) do
   add_index "phrases", ["key"], name: "index_phrases_on_key", using: :btree
 
   create_table "translations", force: true do |t|
+    t.integer  "app_id"
     t.integer  "locale_id"
     t.integer  "phrase_id"
     t.text     "value"

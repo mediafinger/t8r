@@ -25,6 +25,7 @@ class CreateAllTheModels < ActiveRecord::Migration
     add_index :phrases, :key
 
     create_table :translations do |t|
+      t.integer     :app_id
       t.integer     :locale_id
       t.integer     :phrase_id
       t.text        :value

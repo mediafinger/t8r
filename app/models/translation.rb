@@ -1,9 +1,11 @@
 class Translation < ActiveRecord::Base
+  belongs_to  :app
   belongs_to  :locale
   belongs_to  :phrase
 
+  validates :app_id,    presence: true
   validates :locale_id, presence: true
-  validates :phrase_id, presence: true
+  validates :phrase_id, presence: true, uniqueness: { scope: :locale }
 
   def app
     locale.app
