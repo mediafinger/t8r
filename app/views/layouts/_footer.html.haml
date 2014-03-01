@@ -1,3 +1,8 @@
 .container
   .footer
+
+    - if @app.present?
+      %span.footer-link= link_to @app.name, app_path(@app)
+      \|
+
     %span.footer-link= link_to I18n.t('pages.home'),   root_path
