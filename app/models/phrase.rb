@@ -2,6 +2,7 @@ class Phrase < ActiveRecord::Base
   belongs_to  :app
   has_many    :translations,  dependent: :destroy
 
+  before_validation(on: :create) { self.key = self.key.to_s.parameterize.underscore.to_sym }
   validates :app_id, presence: true
   validates :key,    presence: true,  uniqueness: { scope: :app }
 

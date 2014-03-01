@@ -14,4 +14,12 @@ class Translation < ActiveRecord::Base
   def info
     "#{app.key}.#{locale.key}.#{phrase.key} = #{value}"
   end
+
+  def to_yml
+    "#{app.key.upcase}_#{phrase.key.upcase}: #{value}"
+  end
+
+  def to_s
+    value
+  end
 end
