@@ -4,7 +4,7 @@ source 'http://bundler-api.herokuapp.com'
 ruby '2.1.1'
 
 gem 'rake',                         '~> 10.1'
-gem 'puma',                         '~> 2.7'
+gem 'puma',                         '~> 2.8'
 gem 'rails',                        '= 4.0.3'
 gem 'pg',                           '~> 0.17'
 
