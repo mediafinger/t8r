@@ -5,22 +5,18 @@
     %th Key [T]
     %th Value [T]
     %th Hint [T]
-    %th
-    %th
     %th Delete [T]
     %th Translations [T]
 
   - @phrases.each do |phrase|
     %tr
-      %td= phrase.key
+      %td= link_to phrase.key, edit_app_phrase_path(@app, phrase)
       %td= phrase.value
       %td= phrase.hint
-      %td= link_to 'Show [T]', app_phrase_path(@app, phrase)
-      %td= link_to 'Edit [T]', edit_app_phrase_path(@app, phrase)
       %td= link_to I18n.t('shared.delete'), [@app, phrase], method: :delete, data: { confirm: 'Are you sure? [T]' }
 
       %td
-        - phrase.translations_by_locale.each do |translation|
+        - phrase.translations_ordered_by_locale.each do |translation|
           - klass = translation.done ? "translated" : "untranslated"
           %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
 

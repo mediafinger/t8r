@@ -4,17 +4,15 @@
   %tr
     %th Name [T]
     %th Key [T]
-    %th
-    %th
     %th Add Phrase [T]
+    %th Translate [T]
 
   - @locales.each do |locale|
     %tr
-      %td= locale.name
+      %td= link_to locale.name, edit_app_locale_path(@app, locale)
       %td= locale.key
-      %td= link_to 'Show [T]', app_locale_path(@app, locale)
-      %td= link_to 'Edit [T]', edit_app_locale_path(@app, locale)
       %td= link_to 'Add Phrase [T]', new_app_phrase_path(@app)
+      %td= link_to 'Untranslated [T]', app_translations_path(@app)
 
 %br
 

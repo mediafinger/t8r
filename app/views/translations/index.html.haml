@@ -5,15 +5,12 @@
     %th Key [T]
     %th Locale [T]
     %th Value [T]
-    %th Done [T]
-    %th
     %th
 
   - @translations.each do |translation|
+    - klass = translation.done ? "translated" : "untranslated"
     %tr
-      %td= translation.phrase.key
-      %td= translation.locale.key
+      %td= link_to translation.phrase.key, edit_app_translation_path(@app, translation)
+      %td(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
       %td= translation.value
-      %td= translation.done
       %td= link_to 'Show [T]', app_translation_path(@app, translation)
-      %td= link_to 'Edit [T]', edit_app_translation_path(@app, translation)

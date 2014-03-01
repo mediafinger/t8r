@@ -2,6 +2,8 @@
 
 = render 'form', :app => @app
 
+= link_to 'Add Locale [T]', new_app_locale_path(@app)
+\|
 = link_to 'Show [T]', @app
 \|
-= link_to 'Back [T]', apps_path
+= link_to 'List of apps [T]', apps_path

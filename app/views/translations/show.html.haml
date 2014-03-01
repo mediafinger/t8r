@@ -5,17 +5,22 @@
   %strong Locale: [T]
   = "#{@translation.locale.key} / #{@translation.locale.name}"
 %p
-  %strong Phrase: [T]
+  %strong Phrase-key: [T]
   = @translation.phrase.key
-  = @translation.phrase.value
+%p
+  %strong Phrase-hint: [T]
   = @translation.phrase.hint
+%p
+  %strong Phrase: [T]
+  = @translation.phrase.value
 %p
   %strong Value: [T]
   = @translation.value
 %p
   %strong Done: [T]
-  = @translation.done
+  - klass = @translation.done ? "translated" : "untranslated"
+  %span(class = klass)=  @translation.done
 
 = link_to 'Edit [T]', edit_app_translation_path(@app, @translation)
 \|
-= link_to 'Back [T]', app_translations_path(@app)
+= link_to 'List of translations [T]', app_translations_path(@app)

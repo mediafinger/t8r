@@ -23,13 +23,13 @@
       %h3= "#{translation.locale.key} / #{translation.locale.name}"
 
     .field
-      %strong= translation.phrase.key
-      %p= translation.phrase.value
-      %p= translation.phrase.hint
+      %h3= "#{translation.phrase.key} / #{translation.phrase.value}"
+    .field
+      %strong= "Hint: [T] #{translation.phrase.hint}"
 
     .field
       = f.label :value
-      = f.text_field :value
+      = f.text_area :value
 
     .field
       = f.label :done
