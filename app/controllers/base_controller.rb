@@ -74,7 +74,7 @@ class BaseController < ApplicationController
       if @model_name == "app"
         klass.all.order(name: :asc)
       else
-        klass.where(app_id: @app.id).order(@order)
+        klass.where(app_id: @app.id).default_order
       end
     end
 

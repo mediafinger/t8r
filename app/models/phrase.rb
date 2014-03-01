@@ -9,7 +9,19 @@ class Phrase < ActiveRecord::Base
   after_create :create_translations
   after_update :update_translations
 
-  def translations_by_locale
+  scope :default_order,       -> { order(key: :asc) }
+  scope :untranslated,        -> { joins(:translations).where("translations.done = FALSE") }
+  scope :untranslated_count,  -> { untranslated.count }
+
+  def untranslated
+    translations.joins(:locale).where(done: false)
+  end
+
+  def untranslated_count
+    untranslated.count
+  end
+
+  def translations_ordered_by_locale
     translations.joins(:locale).order('locales.key asc')
   end
 
