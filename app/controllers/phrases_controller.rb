@@ -10,6 +10,11 @@ class PhrasesController < BaseController
   # edit    inherited from BaseController
   # update  inherited from BaseController
 
+  def index
+    @order = { key: :asc }
+    super
+  end
+
   def destroy
     @phrase = @app.phrases.find(params[:id])
 

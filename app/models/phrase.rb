@@ -9,6 +9,10 @@ class Phrase < ActiveRecord::Base
   after_create :create_translations
   after_update :update_translations
 
+  def translations_by_locale
+    translations.joins(:locale).order('locales.key asc')
+  end
+
   def create_translations
     app.locales.each do |locale|
       Translation.create!(app_id: app.id, locale_id: locale.id, phrase_id: self.id)

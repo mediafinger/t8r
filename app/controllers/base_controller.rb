@@ -7,7 +7,6 @@ class BaseController < ApplicationController
   #
   def index
     instance_variable_set("@#{controller_name}", scope(@klass))
-    # respond_with instance_variable_get("@#{controller_name}")
     respond(instance_variable_get("@#{controller_name}"))
   end
 
@@ -17,7 +16,6 @@ class BaseController < ApplicationController
   #
   def show
     instance_variable_set("@#{@model_name}", @klass.find(params[:id]))
-    # respond_with instance_variable_get("@#{@model_name}")
     respond(instance_variable_get("@#{@model_name}"))
   end
 
@@ -74,9 +72,9 @@ class BaseController < ApplicationController
 
     def scope(klass)
       if @model_name == "app"
-        klass.all
+        klass.all.order(name: :asc)
       else
-        klass.where(app_id: @app.id)
+        klass.where(app_id: @app.id).order(@order)
       end
     end
 

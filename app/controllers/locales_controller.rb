@@ -10,6 +10,10 @@ class LocalesController < BaseController
   # edit    inherited from BaseController
   # update  inherited from BaseController
 
+  def index
+    @order = { name: :asc }
+    super
+  end
 
   private
 

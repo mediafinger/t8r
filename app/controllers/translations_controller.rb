@@ -11,6 +11,10 @@ class TranslationsController < BaseController
   # update  inherited from BaseController
   # destroy inherited from BaseController
 
+  def index
+    @order = { done: :asc, updated_at: :asc }
+    super
+  end
 
   private
 
