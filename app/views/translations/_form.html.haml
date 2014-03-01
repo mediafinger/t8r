@@ -37,4 +37,7 @@
 
 
   .actions
-    = f.submit 'Save [T]'
+    - if translation.reload.done && (translation.updated_at + 15.minutes) > Time.now.utc
+      = f.submit 'Update(!) [T]', :class => "button", data: { confirm: "Translation was saved as:\n\n #{translation.value}\n\n less than 15 minutes ago. Do you really want to overwrite it?  [T]" }
+    - else
+      = f.submit 'Save [T]', :class => "button"
