@@ -73,7 +73,7 @@ class BaseController < ApplicationController
     end
 
     def scope(klass)
-      if @model_name == "App"
+      if @model_name == "app"
         klass.all
       else
         klass.where(app_id: @app.id)
@@ -82,7 +82,7 @@ class BaseController < ApplicationController
 
     def respond(instance)
       if @model_name == "app"
-        instance
+        respond_with instance
       else
         respond_with @app, instance
       end
