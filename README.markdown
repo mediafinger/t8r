@@ -1,17 +1,17 @@
-{<img src="https://travis-ci.org/mediafinger/t8r.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mediafinger/t8r]
+<!-- {<img src="https://travis-ci.org/mediafinger/t8r.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mediafinger/t8r] -->
 # README
 
 T8r is meant to make the maintenance of the I18n process of web apps easier. It won't do any magic or use dirty tricks, but it wants to be a helpful tool. It is aimed at developers, translators and copy-writers.
 
 It has support for multiple apps and each app can have it's own set of languages that need to be maintained.
 
-Text ressources (called 'phrases' in T8r) will always be the draft or master. They have to be translated in every language (or 'locale') before they can be exported.
+Text ressources (called 'phrases' in T8r) will always be the draft or master. They can be created in T8r - or via bulk import from a YAML file (on locale at a time).
 
 Translation that are not marked as 'done' are highlighted and linked in T8r. This functionality can also be used to add a proofreading step after the translation.
 
 It is realy simple, this is the full ERD:
 
-![ERD.pdf](./erd.pdf)
+![ERD.pdf](https://github.com/mediafinger/t8r/raw/master/erd.pdf)
 
 ## Setup
 
@@ -33,7 +33,6 @@ There are no external dependencies
 
 A lot :) Just the most important features that I have in mind:
 
-*  Import of YML files
 *  Export of YML files
 *  Import of files in other formats
 *  Export of files in other formats
