@@ -1,0 +1,10 @@
+%h2 YAML file download [T]
+
+= form_tag app_export_download_yaml_path(@app), :method => :post, :multipart => true do
+
+  .field
+    = label_tag :locale
+    = select_tag :locale, options_for_select(@locales)
+
+  .field
+    = submit_tag 'Export [T]'

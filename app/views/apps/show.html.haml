@@ -5,4 +5,6 @@
   %strong Key: [T]
   = @app.key
 
-= link_to 'Import YAML file [T]', app_import_show_path(@app)
+= link_to 'Import YAML file [T]', app_import_path(@app)
+\|
+= link_to 'Export YAML file [T]', app_export_path(@app)
