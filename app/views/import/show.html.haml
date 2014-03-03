@@ -7,4 +7,18 @@
     = file_field_tag :file
 
   .field
+    = label_tag :import_translations, 'Import_translations [T]'
+    = radio_button_tag(:import_translations, :false, true)
+    = label_tag :import_translations, :false
+    = radio_button_tag(:import_translations, :true)
+    = label_tag :import_translations, :true
+
+  .field
+    = label_tag :set_as_translated, 'When importing translations, mark them as translated [T]'
+    = radio_button_tag(:set_as_translated, :true, true)
+    = label_tag :set_as_translated, :true
+    = radio_button_tag(:set_as_translated, :false)
+    = label_tag :set_as_translated, :false
+
+  .field
     = submit_tag 'Import [T]'
