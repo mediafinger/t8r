@@ -72,9 +72,9 @@ class BaseController < ApplicationController
 
     def scope(klass)
       if @model_name == "app"
-        klass.all.order(name: :asc)
+        klass.all.order(name: :asc).page(params[:page])
       else
-        klass.where(app_id: @app.id).default_order
+        klass.where(app_id: @app.id).default_order.page(params[:page])
       end
     end
 

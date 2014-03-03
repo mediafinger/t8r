@@ -2,6 +2,10 @@
 
 %table
   %tr
+    %td{:colspan => 2}= will_paginate @phrases
+    %td{:colspan => 2}= page_entries_info @phrases
+
+  %tr
     %th Key [T]
     %th Locale [T]
     %th Value [T]
@@ -14,3 +18,7 @@
       %td(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
       %td= translation.value
       %td= link_to 'Show [T]', app_translation_path(@app, translation)
+
+  %tr
+    %td{:colspan => 2}= page_entries_info @phrases
+    %td{:colspan => 2}= will_paginate @phrases

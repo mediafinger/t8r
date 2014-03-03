@@ -13,6 +13,7 @@ gem 'coffee-rails',                 '~> 4.0'
 gem 'haml-rails',                   '~> 0.5'
 gem 'sass-rails',                   '~> 4.0.0'
 gem 'turbolinks',                   '~> 2.2'
+gem 'will_paginate',                '~> 3.0'
 
 
 # to speed Travis-CI up

@@ -137,6 +137,7 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    will_paginate (3.0.5)
 
 PLATFORMS
   ruby
@@ -160,3 +161,4 @@ DEPENDENCIES
   therubyracer (~> 0.12)
   turbolinks (~> 2.2)
   uglifier (~> 2.4)
+  will_paginate (~> 3.0)

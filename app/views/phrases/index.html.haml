@@ -2,11 +2,17 @@
 
 %table
   %tr
+    %td{:colspan => 2}= will_paginate @phrases
+    %td
+    %td{:colspan => 2}= page_entries_info @phrases
+
+  %tr
     %th Key [T]
     %th Value [T]
     %th Hint [T]
     %th Delete [T]
     %th Translations [T]
+
 
   - @phrases.each do |phrase|
     %tr
@@ -20,6 +26,12 @@
           - klass = translation.done ? "translated" : "untranslated"
           %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
 
+  %tr
+    %td{:colspan => 2}= page_entries_info @phrases
+    %td
+    %td{:colspan => 2}= will_paginate @phrases
+
 %br
+
 
 %p= link_to "New phrase [T]", new_app_phrase_path(@app)
