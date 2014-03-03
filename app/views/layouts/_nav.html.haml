@@ -3,7 +3,7 @@
 .navbar
   %ul.nav
     %li= link_to I18n.t('pages.apps'),           apps_path
-    - if @app.present?
+    - if @app.present? && @app.id
       %li= link_to I18n.t('pages.locales'),        app_locales_path(@app)
       %li= link_to I18n.t('pages.phrases'),        app_phrases_path(@app)
       %li= link_to I18n.t('pages.translations'),   app_translations_path(@app)
