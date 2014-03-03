@@ -7,4 +7,7 @@ T8r::Application.routes.draw do
     resources :translations,  only: [:index, :show, :edit, :new, :update, :create]
   end
 
+  get   'import/show'        => 'import#show'
+  post  'import/upload_yaml' => 'import#upload_yaml'
+
 end

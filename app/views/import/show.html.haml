@@ -1,0 +1,14 @@
+%h2 YAML file upload
+
+= form_tag "/import/upload_yaml", :method => :post, :multipart => true do
+
+  .field
+    = label_tag :app
+    = select_tag :app, options_for_select(@apps)
+
+  .field
+    = label_tag :file, 'YAML file [T]'
+    = file_field_tag :file
+
+  .field
+    = submit_tag 'Import [T]'
