@@ -2,9 +2,11 @@ class Phrase < ActiveRecord::Base
   belongs_to  :app
   has_many    :translations,  dependent: :destroy
 
-  before_validation  { self.key = self.key.to_s.parameterize.underscore.to_sym }
-  validates :app_id, presence: true
-  validates :key,    presence: true,  uniqueness: { scope: :app }
+  attr_accessor :key_is_valid
+
+  before_validation   :encode_key,     on: :create
+  validates :app_id,  presence: true
+  validates :key,     presence: true,  uniqueness: { scope: :app }
 
   after_create :create_translations
   after_update :update_translations
@@ -38,5 +40,13 @@ class Phrase < ActiveRecord::Base
 
   def to_json(options = {})
     { app: app.key, key: key, value: value, hint: hint }.to_json
+  end
+
+  def encode_key
+    if @key_is_valid
+      self.key
+    else
+      self.key = self.key.to_s.parameterize.underscore.to_sym
+    end
   end
 end

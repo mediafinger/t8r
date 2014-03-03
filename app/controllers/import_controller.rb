@@ -1,12 +1,12 @@
 class ImportController < ApplicationController
-  before_filter :ensure_apps
+  before_filter :ensure_app
   respond_to    :html, :json
 
   def show
   end
 
   def upload_yaml
-    @app  = App.find(upload_params[:app])
+    @app  = App.find(upload_params[:app_id])
     @yaml = YAML::load(upload_params[:file].read)
 
     parse_yaml(@app, @yaml)
@@ -27,10 +27,12 @@ class ImportController < ApplicationController
         parse_yaml_tree(app, parent_key(parent, key), value)
       elsif value.is_a? Array
         phrase = Phrase.new(app: app, key: parent_key(parent, key), value: value.inspect) # TODO ?
-        phrase.save(validate: false) # skip validation to save key with dots
+        phrase.key_is_valid = true   # skip validation to save key with dots
+        phrase.save
       elsif value.is_a? String
         phrase = Phrase.new(app: app, key: parent_key(parent, key), value: value)
-        phrase.save(validate: false) # skip validation to save key with dots
+        phrase.key_is_valid = true   # skip validation to save key with dots
+        phrase.save
       end
     end
   end
@@ -45,12 +47,12 @@ class ImportController < ApplicationController
 
   private
 
-  def ensure_apps
-    @apps ||= App.all.order(name: :asc).pluck(:name, :id)
+  def ensure_app
+    @app ||= App.find(params[:app_id])
   end
 
   def upload_params
-    params.require(:app)
+    params.require(:app_id)
     params.require(:file)
 
     params
