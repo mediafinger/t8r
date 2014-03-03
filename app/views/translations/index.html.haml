@@ -3,22 +3,36 @@
 %table
   %tr
     %td{:colspan => 2}= will_paginate @phrases
-    %td{:colspan => 2}= page_entries_info @phrases
+    %td{:colspan => 3}= page_entries_info @phrases
 
   %tr
     %th Key [T]
+    %th Content [T]
     %th Locale [T]
-    %th Value [T]
-    %th
+    %th Translation [T]
+    %th done
 
   - @translations.each do |translation|
     - klass = translation.done ? "translated" : "untranslated"
     %tr
-      %td= link_to translation.phrase.key, edit_app_translation_path(@app, translation)
+      / Phrase key with link to translation's show view - in line below the hint
+      %td
+        = link_to translation.phrase.key, app_translation_path(@app, translation)
+        %br
+        = translation.phrase.hint
+
+      / Phrase value
+      %td= translation.phrase.value
+
+      / Locale (highlighted when untranslated) with link to edit translation
       %td(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
-      %td= translation.value
-      %td= link_to 'Show [T]', app_translation_path(@app, translation)
+
+      / Translation value
+      %td= best_in_place translation, :value, :type => :textarea, :path => app_translation_path(@app, translation), nil: '<span class="translation-placeholder">...................</span>'
+
+      / Checkbox to mark translation as done
+      %td= best_in_place translation, :done, :type => :checkbox, :collection => ["untranslated", "done"], :path => app_translation_path(@app, translation)
 
   %tr
     %td{:colspan => 2}= page_entries_info @phrases
-    %td{:colspan => 2}= will_paginate @phrases
+    %td{:colspan => 3}= will_paginate @phrases
