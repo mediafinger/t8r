@@ -6,8 +6,13 @@ class BaseController < ApplicationController
   #   respond_with @addresses
   #
   def index
-    instance_variable_set("@#{controller_name}", scope(@klass))
-    respond(instance_variable_get("@#{controller_name}"))
+    scope = scope(@klass)
+    scope = filter(scope)
+    scope = sort(scope)
+    scope = paginate(scope)
+
+    instance = instance_variable_set("@#{controller_name}", scope)
+    respond(instance)
   end
 
 
@@ -72,10 +77,26 @@ class BaseController < ApplicationController
 
     def scope(klass)
       if @model_name == "app"
-        klass.all.order(name: :asc).page(params[:page])
+        klass.all
       else
-        klass.where(app_id: @app.id).default_order.page(params[:page])
+        klass.where(app_id: @app.id)
       end
+    end
+
+    def filter(scope)
+      if @filter.present? && !@filter.blank?
+        scope.where(@filter)
+      else
+        scope
+      end
+    end
+
+    def sort(scope)
+      scope.default_order
+    end
+
+    def paginate(scope)
+      scope.page(params[:page])
     end
 
     def respond(instance)
