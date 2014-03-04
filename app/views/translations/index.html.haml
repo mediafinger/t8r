@@ -36,3 +36,14 @@
   %tr
     %td{:colspan => 2}= page_entries_info @phrases
     %td{:colspan => 3}= will_paginate @phrases
+
+
+/ The dark realms:
+:javascript
+
+  // TODO: extract to appropriate place:
+
+  $(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+  });
