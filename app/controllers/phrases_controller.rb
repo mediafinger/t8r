@@ -1,6 +1,4 @@
 class PhrasesController < BaseController
-  before_filter :ensure_app
-
   respond_to    :html, :json
 
   # index   inherited from BaseController
@@ -36,9 +34,5 @@ class PhrasesController < BaseController
   def ensure_sort
     @default_sort = { key: :asc }
     super
-  end
-
-  def ensure_app
-    @app ||= App.find(params[:app_id])
   end
 end

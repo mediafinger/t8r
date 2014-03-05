@@ -1,6 +1,4 @@
 class TranslationsController < BaseController
-  before_filter :ensure_app
-
   respond_to    :html, :json
 
   # index   inherited from BaseController
@@ -9,7 +7,6 @@ class TranslationsController < BaseController
   # create  inherited from BaseController
   # edit    inherited from BaseController
   # update  inherited from BaseController
-  # destroy inherited from BaseController
 
 
   private
@@ -25,9 +22,5 @@ class TranslationsController < BaseController
   def ensure_sort
     @default_sort = { done: :asc, updated_at: :asc }
     super
-  end
-
-  def ensure_app
-    @app ||= App.find(params[:app_id])
   end
 end

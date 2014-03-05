@@ -1,5 +1,6 @@
 class BaseController < ApplicationController
   before_filter :set_model_name_and_klass
+  before_filter :ensure_app
   before_filter :ensure_filter, :ensure_sort, only: [:index]
 
   # The resulting index method looks like this one:
@@ -76,6 +77,16 @@ class BaseController < ApplicationController
       name.split("_").each{ |word| word.capitalize! }.join("")
     end
 
+    def respond(instance)
+      if @model_name == "app"
+        respond_with instance
+      else
+        respond_with @app, instance
+      end
+    end
+
+
+    # index helper method
     def scope(klass)
       if @model_name == "app"
         klass.all
@@ -84,6 +95,7 @@ class BaseController < ApplicationController
       end
     end
 
+    # index helper method
     def filter(scope)
       if @filter.present? && !@filter.blank?
         scope.where(@filter)
@@ -92,6 +104,7 @@ class BaseController < ApplicationController
       end
     end
 
+    # index helper method
     def sort(scope)
       if @sort.present? && !@sort.blank?
         scope.order(@sort)
@@ -100,17 +113,11 @@ class BaseController < ApplicationController
       end
     end
 
+    # index helper method
     def paginate(scope)
       scope.page(params[:page])
     end
 
-    def respond(instance)
-      if @model_name == "app"
-        respond_with instance
-      else
-        respond_with @app, instance
-      end
-    end
 
     def ensure_sort
       if params[:sort].present?
@@ -127,6 +134,11 @@ class BaseController < ApplicationController
       if params[:filter].present?
         @filter = params[:filter]
       end
+    end
+
+    def ensure_app
+      return if @model_name == "app"
+      @app ||= App.find(params[:app_id])
     end
 
 end
