@@ -98,7 +98,15 @@ class BaseController < ApplicationController
     # index helper method
     def filter(scope)
       if @filter.present? && !@filter.blank?
-        scope.where(@filter)
+
+        if @filter[:value].present?
+          scope.where("value LIKE ?", "%#{@filter[:value]}%")
+        elsif @filter[:key].present?
+          scope.where("key LIKE ?", "%#{@filter[:key]}%")
+        else
+          scope
+        end
+
       else
         scope
       end
