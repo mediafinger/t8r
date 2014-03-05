@@ -22,6 +22,11 @@ class TranslationsController < BaseController
     params.require(:translation).permit(:value, :done)
   end
 
+  def ensure_sort
+    @default_sort = { done: :asc, updated_at: :asc }
+    super
+  end
+
   def ensure_app
     @app ||= App.find(params[:app_id])
   end

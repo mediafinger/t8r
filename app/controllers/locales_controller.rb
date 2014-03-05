@@ -21,6 +21,11 @@ class LocalesController < BaseController
     params.require(:locale).permit(:name)
   end
 
+  def ensure_sort
+    @default_sort = "LOWER(name)"
+    super
+  end
+
   def ensure_app
     @app ||= App.find(params[:app_id])
   end

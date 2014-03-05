@@ -9,8 +9,6 @@ class Locale < ActiveRecord::Base
 
   after_create :create_translations
 
-  scope :default_order, -> { order(name: :asc) }
-
   def untranslated
     translations.joins(:phrase).where(done: false)
   end

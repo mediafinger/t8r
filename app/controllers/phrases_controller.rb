@@ -33,6 +33,11 @@ class PhrasesController < BaseController
     params.require(:phrase).permit(:value, :hint)
   end
 
+  def ensure_sort
+    @default_sort = { key: :asc }
+    super
+  end
+
   def ensure_app
     @app ||= App.find(params[:app_id])
   end

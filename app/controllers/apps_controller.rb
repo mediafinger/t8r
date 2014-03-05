@@ -19,4 +19,8 @@ class AppsController < BaseController
     params.require(:app).permit(:name)
   end
 
+  def ensure_sort
+    @default_sort = "LOWER(name)"
+    super
+  end
 end

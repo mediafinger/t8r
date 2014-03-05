@@ -1,5 +1,6 @@
 class BaseController < ApplicationController
   before_filter :set_model_name_and_klass
+  before_filter :ensure_filter, :ensure_sort, only: [:index]
 
   # The resulting index method looks like this one:
   #   @addresses = Address.all
@@ -92,7 +93,11 @@ class BaseController < ApplicationController
     end
 
     def sort(scope)
-      scope.default_order
+      if @sort.present? && !@sort.blank?
+        scope.order(@sort)
+      else
+        scope
+      end
     end
 
     def paginate(scope)
@@ -106,4 +111,19 @@ class BaseController < ApplicationController
         respond_with @app, instance
       end
     end
+
+    def ensure_sort
+      if params[:sort].present?
+        @sort = params[:sort]
+      elsif @default_sort.present?
+        @sort = @default_sort
+      end
+    end
+
+    def ensure_filter
+      if params[:filter].present?
+        @filter = params[:filter]
+      end
+    end
+
 end

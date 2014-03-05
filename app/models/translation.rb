@@ -9,7 +9,6 @@ class Translation < ActiveRecord::Base
 
   scope :by_locale,           lambda { |locale| where(locale_id: locale.id) }
   scope :by_phrase,           lambda { |phrase| where(phrase_id: phrase.id) }
-  scope :default_order,       -> { order(done: :asc, updated_at: :asc) }
   scope :translated,          -> { where(done: true) }
   scope :untranslated,        -> { where(done: false) }
   scope :untranslated_count,  -> { untranslated.count }

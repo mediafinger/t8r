@@ -11,8 +11,6 @@ class Phrase < ActiveRecord::Base
   after_create :create_translations
   after_update :update_translations
 
-  scope :default_order,       -> { order(key: :asc) }
-
   def untranslated
     translations.joins(:locale).where(done: false)
   end
