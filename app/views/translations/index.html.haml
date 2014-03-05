@@ -9,8 +9,8 @@
     %th Key [T]
     %th Content [T]
     %th Locale [T]
-    %th Translation [T]
-    %th done
+    %th= link_to "Translation [T]", app_translations_path(@app, sort: "LOWER(value)")
+    %th= link_to "done [T]", app_translations_path(@app, sort: { done: :asc})
 
   - @translations.each do |translation|
     - klass = translation.done ? "translated" : "untranslated"
@@ -32,6 +32,13 @@
 
       / Checkbox to mark translation as done
       %td= best_in_place translation, :done, :type => :checkbox, :collection => ["untranslated", "done"], :path => app_translation_path(@app, translation)
+
+  %tr
+    %th Key [T]
+    %th Content [T]
+    %th Locale [T]
+    %th= link_to "Translation [T]", app_translations_path(@app, sort: "LOWER(value) desc")
+    %th= link_to "done [T]", app_translations_path(@app, sort: { done: :desc})
 
   %tr
     %td{:colspan => 2}= page_entries_info @phrases

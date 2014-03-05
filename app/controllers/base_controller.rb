@@ -115,6 +115,9 @@ class BaseController < ApplicationController
     def ensure_sort
       if params[:sort].present?
         @sort = params[:sort]
+
+        # sorting values that are not :symbols lead to errors
+        @sort = @sort.inject({}){ |hash, (k,v)| hash[k] = v.to_sym; hash }  if @sort.is_a? Hash
       elsif @default_sort.present?
         @sort = @default_sort
       end
