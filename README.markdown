@@ -5,9 +5,9 @@ T8r is meant to make the maintenance of the I18n process of web apps easier. It 
 
 It has support for multiple apps and each app can have it's own set of languages that need to be maintained.
 
-Text ressources (called *phrases* in T8r) will always be the draft or master. They can be created in T8r - or via bulk import from a YAML file (one locale at a time).
+Text ressources (called *phrases* in T8r) will always be the draft or master. They can be created in T8r - or via bulk import from a YAML file (one *locale* at a time).
 
-Translations that are not marked as *done* are highlighted and linked in T8r. This functionality can be used to add a proofreading step after the translation.
+Translations are created for every locale. The ones not marked as *done* are highlighted and linked in T8r. This functionality can be used to add a proofreading step after the translation - or to control which translations should be exported when.
 
 It is realy simple, this is the full ERD:
 
@@ -33,7 +33,7 @@ There are no external dependencies
 
 A lot :) Just the most important features that I have in mind:
 
-* Searching and filtering
+*  Searching and filtering
 *  Import of files in other formats
 *  Export of files in other formats
 *  Configurable import and export
