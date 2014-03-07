@@ -14,7 +14,7 @@
       %td= app.key
       %td= link_to 'Edit [T]', edit_app_path(app)
       %td= link_to 'Add Phrase [T]', new_app_phrase_path(app)
-      %td= link_to 'Untranslated [T]', app_translations_path(app)
+      %td= link_to 'Untranslated [T]', app_translations_path(app, filter: {done: false})
 
   %tr
     %td{:colspan => 2}= page_entries_info @phrases
