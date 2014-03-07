@@ -11,6 +11,7 @@ class BaseController < ApplicationController
     scope = scope(@klass)
     scope = filter(scope)
     scope = sort(scope)
+    scope = join(scope)
     scope = paginate(scope)
 
     instance = instance_variable_set("@#{controller_name}", scope)
@@ -115,7 +116,30 @@ class BaseController < ApplicationController
     # index helper method
     def sort(scope)
       if @sort.present? && !@sort.blank?
-        scope.order(@sort)
+
+        # special treatment for translation#index --> extract?
+        if @sort["locale_key"].present?
+          @join = :locale
+          scope.order("locales.key #{@sort['locale_key']}")
+        elsif @sort["phrase_key"].present?
+          @join = :phrase
+          scope.order("phrases.key #{@sort['phrase_key']}")
+        elsif @sort["phrase_value"].present?
+          @join = :phrase
+          scope.order("phrases.value #{@sort['phrase_value']}")
+
+        else
+          scope.order(@sort)
+        end
+
+      else
+        scope
+      end
+    end
+
+    def join(scope)
+      if @join.present? && !@join.blank?
+        scope.joins(@join)
       else
         scope
       end
@@ -130,8 +154,7 @@ class BaseController < ApplicationController
     def ensure_sort
       if params[:sort].present?
         @sort = params[:sort]
-
-        # sorting values that are not :symbols lead to errors
+              # sorting values that are not :symbols lead to errors
         @sort = @sort.inject({}){ |hash, (k,v)| hash[k] = v.to_sym; hash }  if @sort.is_a? Hash
       elsif @default_sort.present?
         @sort = @default_sort

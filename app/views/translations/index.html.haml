@@ -6,11 +6,11 @@
     %td{:colspan => 3}= page_entries_info @phrases
 
   %tr
-    %th Key [T]
-    %th Content [T]
-    %th Locale [T]
-    %th= link_to "Translation [T]", app_translations_path(@app, sort: "LOWER(value)")
-    %th= link_to "done [T]", app_translations_path(@app, sort: { done: :asc})
+    %th= link_to "Key [T]",         app_translations_path(@app, sort: {phrase_key: :asc})
+    %th= link_to "Content [T]",     app_translations_path(@app, sort: {phrase_value: :asc})
+    %th= link_to "Locale [T]",      app_translations_path(@app, sort: {locale_key: :asc})
+    %th= link_to "Translation [T]", app_translations_path(@app, sort: {value: :asc})
+    %th= link_to "done [T]",        app_translations_path(@app, sort: {done: :asc})
 
   - @translations.each do |translation|
     - klass = translation.done ? "translated" : "untranslated"
@@ -34,11 +34,11 @@
       %td= best_in_place translation, :done, :type => :checkbox, :collection => ["untranslated", "done"], :path => app_translation_path(@app, translation)
 
   %tr
-    %th Key [T]
-    %th Content [T]
-    %th Locale [T]
-    %th= link_to "Translation [T]", app_translations_path(@app, sort: "LOWER(value) desc")
-    %th= link_to "done [T]", app_translations_path(@app, sort: { done: :desc})
+    %th= link_to "Key [T]",         app_translations_path(@app, sort: {phrase_key: :desc})
+    %th= link_to "Content [T]",     app_translations_path(@app, sort: {phrase_value: :desc})
+    %th= link_to "Locale [T]",      app_translations_path(@app, sort: {locale_key: :desc})
+    %th= link_to "Translation [T]", app_translations_path(@app, sort: {value: :desc})
+    %th= link_to "done [T]",        app_translations_path(@app, sort: {done: :desc})
 
   %tr
     %td{:colspan => 2}= page_entries_info @phrases
