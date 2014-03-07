@@ -3,11 +3,13 @@
 
 T8r is meant to make the maintenance of the I18n process of web apps easier. It won't do any magic or use dirty tricks, but it wants to be a helpful tool. It is aimed at developers, translators and copy-writers.
 
-It has support for multiple apps and each app can have it's own set of languages that need to be maintained.
+It has support for multiple *apps* and each app can have it's own set of languages (called *locales* in T8r).
 
-Text ressources (called *phrases* in T8r) will always be the draft or master. They can be created in T8r - or via bulk import from a YAML file (one *locale* at a time).
+Text ressources (called *phrases* in T8r) will always stay as draft (or master). They can be created in T8r - or via bulk import from a YAML file (one locale at a time).
 
-Translations are created for every locale. The ones not marked as *done* are highlighted and linked in T8r. This functionality can be used to add a proofreading step after the translation - or to control which translations should be exported when.
+Translations are created for every locale - either empty, or prefilled when importing. The ones not marked as *done* are highlighted and linked in T8r. This functionality can be used to add a proofreading step after the translation - or to control which translations should be exported when.
+
+Editing translations happens in-place. Sorting, filtering and full-text search are availabe.
 
 It is realy simple, this is the full ERD:
 
@@ -33,12 +35,11 @@ There are no external dependencies
 
 A lot :) Just the most important features that I have in mind:
 
-*  Searching and filtering
+*  JSON REST API for all important functionality, including bulk-imports
+*  Frontend design
+*  Configurable import and export
 *  Import of files in other formats
 *  Export of files in other formats
-*  Configurable import and export
-*  Frontend design
-*  JSON REST API for all important functionality, including bulk-imports
 *  (maybe) a User Rights System or Role System
 
 
