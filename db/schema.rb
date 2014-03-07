@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228224609) do
+ActiveRecord::Schema.define(version: 20140307063008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "citext"
 
   create_table "apps", force: true do |t|
-    t.string   "name"
-    t.string   "key"
+    t.text     "name"
+    t.text     "key"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,8 +28,8 @@ ActiveRecord::Schema.define(version: 20140228224609) do
 
   create_table "locales", force: true do |t|
     t.integer  "app_id"
-    t.string   "name"
-    t.string   "key"
+    t.text     "name"
+    t.text     "key"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140228224609) do
 
   create_table "phrases", force: true do |t|
     t.integer  "app_id"
-    t.string   "key"
+    t.text     "key"
     t.text     "value"
     t.text     "hint"
     t.datetime "created_at"
