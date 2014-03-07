@@ -100,13 +100,30 @@ class BaseController < ApplicationController
     def filter(scope)
       if @filter.present? && !@filter.blank?
 
-        if @filter[:value].present?
-          scope.where("value LIKE ?", "%#{@filter[:value]}%")
-        elsif @filter[:key].present?
-          scope.where("key LIKE ?", "%#{@filter[:key]}%")
-        else
-          scope
+        # special treatment for translation#index --> extract?
+        @filter.each do |filter_key, filter_value|
+          if filter_key == "value" && !filter_value.blank?
+            scope = scope.where("translations.value LIKE ?", "%#{filter_value}%")
+
+          elsif filter_key == "done" && !filter_value.blank?
+            scope = scope.where("translations.done = ?", filter_value)
+
+          elsif filter_key == "locale_key" && !filter_value.blank?
+            ensure_join :locale
+            scope = scope.where("locales.key = ?", filter_value)
+
+          elsif filter_key == "phrase_key" && !filter_value.blank?
+            ensure_join :phrase
+            scope = scope.where("phrases.key LIKE ?", "%#{filter_value}%")
+
+          elsif filter_key == "phrase_value" && !filter_value.blank?
+            ensure_join :phrase
+            scope = scope.where("phrases.value LIKE ?", "%#{filter_value}%")
+          end
         end
+
+        # return the scope - and not the @filter.each result...
+        scope
 
       else
         scope
@@ -119,15 +136,14 @@ class BaseController < ApplicationController
 
         # special treatment for translation#index --> extract?
         if @sort["locale_key"].present?
-          @join = :locale
-          scope.order("locales.key #{@sort['locale_key']}")
+          ensure_join :locale
+          scope.order("locales.key #{@sort["locale_key"]}")
         elsif @sort["phrase_key"].present?
-          @join = :phrase
-          scope.order("phrases.key #{@sort['phrase_key']}")
+          ensure_join :phrase
+          scope.order("phrases.key #{@sort["phrase_key"]}")
         elsif @sort["phrase_value"].present?
-          @join = :phrase
-          scope.order("phrases.value #{@sort['phrase_value']}")
-
+          ensure_join :phrase
+          scope.order("phrases.value #{@sort["phrase_value"]}")
         else
           scope.order(@sort)
         end
@@ -139,7 +155,9 @@ class BaseController < ApplicationController
 
     def join(scope)
       if @join.present? && !@join.blank?
-        scope.joins(@join)
+        joins = @join.uniq{ |table_name| table_name }.map{ |table_name| table_name.to_sym }
+
+        scope.joins(joins)
       else
         scope
       end
@@ -150,6 +168,13 @@ class BaseController < ApplicationController
       scope.page(params[:page])
     end
 
+    def ensure_join(table_name)
+      if @join
+        @join << table_name
+      else
+        @join = [table_name]
+      end
+    end
 
     def ensure_sort
       if params[:sort].present?
@@ -159,12 +184,17 @@ class BaseController < ApplicationController
       elsif @default_sort.present?
         @sort = @default_sort
       end
+
+      @sort ||= {}
     end
 
     def ensure_filter
       if params[:filter].present?
         @filter = params[:filter]
+        @filter.delete_if { |k, v| v.empty? }
       end
+
+      @filter ||= {}
     end
 
     def ensure_app

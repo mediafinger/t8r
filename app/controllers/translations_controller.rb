@@ -1,4 +1,5 @@
 class TranslationsController < BaseController
+  before_filter :ensure_locales, only: [:index]
   respond_to    :html, :json
 
   # index   inherited from BaseController
@@ -22,5 +23,9 @@ class TranslationsController < BaseController
   def ensure_sort
     @default_sort = { done: :asc, updated_at: :asc }
     super
+  end
+
+  def ensure_locales
+    @locales ||= @app.locales.order(key: :asc).pluck(:key)
   end
 end

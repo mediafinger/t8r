@@ -1,56 +1,71 @@
 %h1 Listing translations [T]
 
-%table
-  %tr
-    %td{:colspan => 2}= will_paginate @phrases
-    %td{:colspan => 3}= page_entries_info @phrases
+= form_tag(app_translations_path(@app), method: :get) do
+  = utf8_enforcer_tag()
 
-  %tr
-    %th= link_to "Key [T]",         app_translations_path(@app, sort: {phrase_key: :asc})
-    %th= link_to "Content [T]",     app_translations_path(@app, sort: {phrase_value: :asc})
-    %th= link_to "Locale [T]",      app_translations_path(@app, sort: {locale_key: :asc})
-    %th= link_to "Translation [T]", app_translations_path(@app, sort: {value: :asc})
-    %th= link_to "done [T]",        app_translations_path(@app, sort: {done: :asc})
-
-  - @translations.each do |translation|
-    - klass = translation.done ? "translated" : "untranslated"
+  %table
     %tr
-      / Phrase key with link to translation's show view - in line below the hint
-      %td
-        = link_to translation.phrase.key, app_translation_path(@app, translation)
-        %br
-        = translation.phrase.hint
-
-      / Phrase value
-      %td= translation.phrase.value
-
-      / Locale (highlighted when untranslated) with link to edit translation
-      %td(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
-
-      / Translation value
-      %td= best_in_place translation, :value, :type => :textarea, :path => app_translation_path(@app, translation), nil: '<span class="translation-placeholder">...................</span>'
-
-      / Checkbox to mark translation as done
-      %td= best_in_place translation, :done, :type => :checkbox, :collection => ["untranslated", "done"], :path => app_translation_path(@app, translation)
-
-  %tr
-    %th= link_to "Key [T]",         app_translations_path(@app, sort: {phrase_key: :desc})
-    %th= link_to "Content [T]",     app_translations_path(@app, sort: {phrase_value: :desc})
-    %th= link_to "Locale [T]",      app_translations_path(@app, sort: {locale_key: :desc})
-    %th= link_to "Translation [T]", app_translations_path(@app, sort: {value: :desc})
-    %th= link_to "done [T]",        app_translations_path(@app, sort: {done: :desc})
-
-  %tr
-    %td{:colspan => 2}= page_entries_info @phrases
-    %td{:colspan => 3}= will_paginate @phrases
+      %td{:colspan => 2}= will_paginate @phrases
+      %td{:colspan => 3}= page_entries_info @phrases
 
 
-/ The dark realms:
+    %tr
+      %th= link_to "Key [T]",         app_translations_path(@app, sort: {phrase_key: :asc})
+      %th= link_to "Content [T]",     app_translations_path(@app, sort: {phrase_value: :asc})
+      %th= link_to "Locale [T]",      app_translations_path(@app, sort: {locale_key: :asc})
+      %th= link_to "Translation [T]", app_translations_path(@app, sort: {value: :asc})
+      %th= link_to "done [T]",        app_translations_path(@app, sort: {done: :asc})
+
+
+    %tr
+      %td= text_field_tag "filter[phrase_key]",    @filter["phrase_key"], {  placeholder: 'Search by key [T]', size: 40 }
+      %td= text_field_tag "filter[phrase_value]",  @filter["phrase_value"], {  placeholder: 'Enter search term [T]', size: 40 }
+      %td= select_tag     "filter[locale_key]",    options_for_select(@locales, @filter["locale_key"]), {  prompt: 'Filter by locale [T]', width: 6 }
+      %td= text_field_tag "filter[value]",         @filter["value"], {  placeholder: 'Enter search term [T]', size: 40 }
+      %td= text_field_tag "filter[done]",          @filter["done"], {  placeholder: 'TODO [T]', size: 8 }
+
+
+    - @translations.each do |translation|
+      - klass = translation.done ? "translated" : "untranslated"
+      %tr
+        // Phrase key with link to translation's show view - in line below the hint
+        %td
+          = link_to translation.phrase.key, app_translation_path(@app, translation)
+          %br
+          = translation.phrase.hint
+
+        // Phrase value
+        %td= translation.phrase.value
+
+        // Locale (highlighted when untranslated) with link to edit translation
+        %td(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
+
+        // Translation value
+        %td= best_in_place translation, :value, :type => :textarea, :path => app_translation_path(@app, translation), nil: '<span class="translation-placeholder">...................</span>'
+
+        // Checkbox to mark translation as done
+        %td= best_in_place translation, :done, :type => :checkbox, :collection => ["untranslated", "done"], :path => app_translation_path(@app, translation)
+
+
+    %tr
+      %th= link_to "Key [T]",         app_translations_path(@app, sort: {phrase_key: :desc})
+      %th= link_to "Content [T]",     app_translations_path(@app, sort: {phrase_value: :desc})
+      %th= link_to "Locale [T]",      app_translations_path(@app, sort: {locale_key: :desc})
+      %th= link_to "Translation [T]", app_translations_path(@app, sort: {value: :desc})
+      %th= link_to "done [T]",        app_translations_path(@app, sort: {done: :desc})
+
+
+    %tr
+      %td{:colspan => 2}= page_entries_info @phrases
+      %td{:colspan => 2}= will_paginate @phrases
+      %td{:colspan => 1}= submit_tag :search
+
+
+// The dark realms:
 :javascript
 
   // TODO: extract to appropriate place:
-
   $(document).ready(function() {
-    /* Activating Best In Place */
+    // Activating Best In Place
     jQuery(".best_in_place").best_in_place();
   });
