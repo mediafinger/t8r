@@ -20,7 +20,7 @@ class AppsController < BaseController
   end
 
   def ensure_sort
-    @default_sort = "LOWER(name)"
+    @default_sort = { name: :asc }
     super
   end
 end

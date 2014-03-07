@@ -10,49 +10,60 @@
 
 
     %tr
-      %th= link_to "Key [T]",         app_translations_path(@app, sort: {phrase_key: :asc})
-      %th= link_to "Content [T]",     app_translations_path(@app, sort: {phrase_value: :asc})
-      %th= link_to "Locale [T]",      app_translations_path(@app, sort: {locale_key: :asc})
-      %th= link_to "Translation [T]", app_translations_path(@app, sort: {value: :asc})
-      %th= link_to "done [T]",        app_translations_path(@app, sort: {done: :asc})
+      %th.keys
+        = link_to I18n.t('shared.key'),          app_translations_path(@app, sort: {phrase_key: :asc})
+        = link_to "▼",                          app_translations_path(@app, sort: {phrase_key: :desc})
+      %th.phrases
+        = link_to I18n.t('shared.phrase'),       app_translations_path(@app, sort: {phrase_value: :asc})
+        = link_to "▼",                          app_translations_path(@app, sort: {phrase_value: :desc})
+      %th.locales
+        = link_to I18n.t('shared.locale'),       app_translations_path(@app, sort: {locale_key: :asc})
+        = link_to "▼",                          app_translations_path(@app, sort: {locale_key: :desc})
+      %th.translations
+        = link_to I18n.t('shared.translation'),  app_translations_path(@app, sort: {value: :asc})
+        = link_to "▼",                          app_translations_path(@app, sort: {value: :desc})
+      %th.dones
+        = link_to I18n.t('shared.done'),         app_translations_path(@app, sort: {done: :asc})
+        = link_to "▼",                          app_translations_path(@app, sort: {done: :desc})
 
 
     %tr
-      %td= text_field_tag "filter[phrase_key]",    @filter["phrase_key"], {  placeholder: 'Search by key [T]', size: 40 }
-      %td= text_field_tag "filter[phrase_value]",  @filter["phrase_value"], {  placeholder: 'Enter search term [T]', size: 40 }
-      %td= select_tag     "filter[locale_key]",    options_for_select(@locales, @filter["locale_key"]), {  prompt: 'Filter by locale [T]', width: 6 }
-      %td= text_field_tag "filter[value]",         @filter["value"], {  placeholder: 'Enter search term [T]', size: 40 }
-      %td= text_field_tag "filter[done]",          @filter["done"], {  placeholder: 'TODO [T]', size: 8 }
+      %td.keys
+        = text_field_tag "filter[phrase_key]",    @filter["phrase_key"], {  placeholder: I18n.t('views.placeholder_search_key'), size: 40 }
+      %td.phrases
+        = text_field_tag "filter[phrase_value]",  @filter["phrase_value"], {  placeholder: I18n.t('views.placeholder_search_term'), size: 50 }
+      %td.locales
+        = select_tag     "filter[locale_key]",    options_for_select(@locales, @filter["locale_key"]), { prompt: I18n.t('shared.all'), width: 6 }
+      %td.translations
+        = text_field_tag "filter[value]",         @filter["value"], {  placeholder: I18n.t('views.placeholder_search_term'), size: 50 }
+      %td.dones
+        = select_tag     "filter[done]",          options_for_select([["ఠ_ఠ", false], ["✓", true]], @filter["done"]), { prompt: I18n.t('shared.all'), width: 6 }
 
 
     - @translations.each do |translation|
       - klass = translation.done ? "translated" : "untranslated"
       %tr
         // Phrase key with link to translation's show view - in line below the hint
-        %td
-          = link_to translation.phrase.key, app_translation_path(@app, translation)
+        %td.keys
+          = link_to translation.phrase.key, app_translation_path(@app, translation), { title: translation.phrase.key, rel: translation.phrase.key }
           %br
           = translation.phrase.hint
 
         // Phrase value
-        %td= translation.phrase.value
+        %td.phrases
+          = translation.phrase.value
 
         // Locale (highlighted when untranslated) with link to edit translation
-        %td(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
+        %td.locales
+          %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
 
         // Translation value
-        %td= best_in_place translation, :value, :type => :textarea, :path => app_translation_path(@app, translation), nil: '<span class="translation-placeholder">...................</span>'
+        %td.translations
+          = best_in_place translation, :value, :type => :textarea, :path => app_translation_path(@app, translation), nil: '<span class="translation-placeholder">...................</span>'
 
         // Checkbox to mark translation as done
-        %td= best_in_place translation, :done, :type => :checkbox, :collection => ["untranslated", "done"], :path => app_translation_path(@app, translation)
-
-
-    %tr
-      %th= link_to "Key [T]",         app_translations_path(@app, sort: {phrase_key: :desc})
-      %th= link_to "Content [T]",     app_translations_path(@app, sort: {phrase_value: :desc})
-      %th= link_to "Locale [T]",      app_translations_path(@app, sort: {locale_key: :desc})
-      %th= link_to "Translation [T]", app_translations_path(@app, sort: {value: :desc})
-      %th= link_to "done [T]",        app_translations_path(@app, sort: {done: :desc})
+        %td.dones
+          = best_in_place translation, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_translation_path(@app, translation)
 
 
     %tr

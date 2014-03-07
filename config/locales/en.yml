@@ -10,8 +10,18 @@ en:
     phrases: Phrases
     translations: Translations
   shared:
+    all: all
     delete: Delete
+    done: done
+    key: Key
+    locale: Locale
+    phrase: Phrase
+    translation: Translation
   views:
+    placeholder_search_key: Search by key
+    placeholder_search_term: Enter search term
     select_app: Select the app
     select_locale: Select the locale
     select_phrase: Select the phrase
+
+

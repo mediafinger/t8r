@@ -50,9 +50,6 @@ class ExportController < ApplicationController
   def download_params
     params.require(:app_id)
     params.require(:locale)
-    # params.require(:file)
-    # params.require(:import_translations)
-    # params.require(:set_as_translated)
 
     params
   end
