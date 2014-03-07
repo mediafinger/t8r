@@ -26,10 +26,6 @@ describe Translation do
   end
 
   context "scopes and finders" do
-    it "defines a default_order" do
-      Translation.default_order.should be
-    end
-
     it "has a scope for all translations of a local" do
       phrase
       spanish = Locale.create!(app: app, name: "Spanish", key: "es")
@@ -69,7 +65,7 @@ describe Translation do
     end
 
     it "#to_json returns json" do
-      translation.to_json.should == { app: app.key, locale: locale.key, phrase: phrase.key, value: translation.value }.to_json
+      translation.to_json.should == { app: app.key, locale: locale.key, phrase: phrase.key, value: translation.value, done: true }.to_json
     end
 
     it "#to_s returns the value" do

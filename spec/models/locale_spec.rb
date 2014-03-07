@@ -42,10 +42,6 @@ describe Locale do
   end
 
   context "scopes and finders" do
-    it "defines a default_order" do
-      Locale.default_order.should be
-    end
-
     it "has a method to query for all untranslated of a phrase" do
       phrase = Phrase.create!(app: app, value: "text", key: "tex")
 
