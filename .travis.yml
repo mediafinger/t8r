@@ -13,7 +13,7 @@ env:
 
 before_script:
   - psql -c 'create database t8r_test;' -U postgres
-  - psql -c 'create extension citext;' -U postgres
+  - psql -c 'create extension citext;' -U postgres -d t8r_test
   - "bundle exec rake db:migrate"
   - "bundle exec rake db:test:prepare"
 
