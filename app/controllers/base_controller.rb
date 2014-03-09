@@ -89,7 +89,7 @@ class BaseController < ApplicationController
 
     # index helper method
     def scope(klass)
-      if @model_name == "app"
+      if klass == App
         klass.all
       else
         klass.where(app_id: @app.id)
