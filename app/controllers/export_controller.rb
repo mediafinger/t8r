@@ -7,37 +7,13 @@ class ExportController < ApplicationController
   end
 
   def download_yaml
-    @app     = App.find(download_params[:app_id])
-    @locale  = Locale.find(download_params[:locale])
-    @phrases = @locale.phrases.default_order
+    locale   = Locale.find(download_params[:locale])
+    phrases  = locale.phrases.order({ key: :asc })
 
-    @yaml = generate_yaml(@locale, @phrases)
-    # @yaml = generate_yaml_for_xing(@locale, @phrases)
+    exporter = Exporter::YAML.new(app: @app, for_xing: true)
+    @yaml    = exporter.export(locale: locale, phrases: phrases)
 
-    send_data @yaml,
-      filename: "#{@locale.key.to_s}.yml",
-      :type=> "text/yml; charset=utf-8"
-  end
-
-  def generate_yaml(locale, phrases)
-    yaml = ["#{locale.key}:"]
-
-    phrases.each do |phrase|
-      yaml << "  #{phrase.key}: ! '#{phrase.translations.by_locale(locale).first.value}'"
-    end
-
-    yaml.join("\n")
-  end
-
-  def generate_yaml_for_xing(locale, phrases)
-    yaml = ["---"]
-    yaml << "#{locale.key}: !omap"
-
-    phrases.each do |phrase|
-      yaml << "- #{phrase.key}: ! '#{phrase.translations.by_locale(locale).first.value}'"
-    end
-
-    yaml.join("\n")
+    send_data @yaml, filename: "#{locale.key.to_s}.yml", :type=> "text/yml; charset=utf-8"
   end
 
 
