@@ -1,3 +1,6 @@
+// Reload page every 15 minutes
+%meta(http-equiv="refresh" content="900")
+
 %h1 Listing translations [T]
 
 = form_tag(app_translations_path(@app), method: :get) do
@@ -57,8 +60,13 @@
           %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
 
         // Translation value
-        %td.translations
-          = best_in_place translation, :value, :type => :textarea, :path => app_translation_path(@app, translation), nil: '<span class="translation-placeholder">...................</span>'
+
+        - if translation.reload.done && (translation.updated_at + 15.minutes) > Time.now.utc
+          %td.translations.just_translated
+            = best_in_place translation, :value, :type => :textarea, :path => app_translation_path(@app, translation), nil: '<span class="translation-placeholder">...................</span>', data: { confirm: "Translation was saved as:\n\n #{translation.value}\n\n less than 15 minutes ago. Do you really want to overwrite it?  [T]" }
+        - else
+          %td.translations
+            = best_in_place translation, :value, :type => :textarea, :path => app_translation_path(@app, translation), nil: '<span class="translation-placeholder">...................</span>'
 
         // Checkbox to mark translation as done
         %td.dones
@@ -75,7 +83,9 @@
 :javascript
 
   // TODO: extract to appropriate place:
-  $(document).ready(function() {
+  $(document).ready(
     // Activating Best In Place
-    jQuery(".best_in_place").best_in_place();
-  });
+    function() { jQuery(".best_in_place").best_in_place(); }
+  );
+
+

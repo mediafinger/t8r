@@ -30,6 +30,9 @@ td, th {
     min-width: 340px;
     overflow-wrap: break-word;
   }
+  &.just_translated {
+  color: #ffd0d0;
+  }
 }
 
 .main {
@@ -55,7 +58,7 @@ td, th {
 .untranslated {
   @include border-radius(1em);
 
-  background-color: #FFD0D0;
+  background-color: #ffd0d0;
   margin: 0 2px 0 2px;
   padding: 0 2px 0 2px;
 }
