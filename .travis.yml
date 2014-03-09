@@ -12,8 +12,8 @@ env:
 #     - rvm: ruby-1.9.3
 
 before_script:
-  - psql -c 'create database t8r_test' -U postgres
-  - psql -c t8r_test 'CREATE EXTENSION citext;' -U postgres
+  - psql -c 'create database t8r_test;' -U postgres
+  - psql -c 'create extension citext;' -U postgres
   - "bundle exec rake db:migrate"
   - "bundle exec rake db:test:prepare"
 
