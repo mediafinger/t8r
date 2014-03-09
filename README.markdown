@@ -1,15 +1,15 @@
-<!-- {<img src="https://travis-ci.org/mediafinger/t8r.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mediafinger/t8r] -->
-# README
+{<img src="https://travis-ci.org/mediafinger/t8r.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mediafinger/t8r]
+# T8r README
 
-T8r is meant to make the maintenance of the I18n process of web apps easier. It won't do any magic or use dirty tricks, but it wants to be a helpful tool. It is aimed at developers, translators and copy-writers.
+T8r is a Rails app that supports the I18n / translation process of web apps. It won't do any magic or use dirty tricks, but it wants to be a helpful translation / text ressource management tool. It is aimed at developers, translators and copy-writers.
 
 It has support for multiple *apps* and each app can have it's own set of languages (called *locales* in T8r).
 
-Text ressources (called *phrases* in T8r) will always stay as draft (or master). They can be created in T8r - or via bulk import from a YAML file (one locale at a time).
+Text ressources (called *phrases* in T8r) are the draft (or master) and provide the unique key, an examplary content and optional hints (e.g. length restrictions, links to webpages or screenshots). They can be created in T8r - or via bulk import from a YAML file.
 
-Translations are created for every locale - either empty, or prefilled when importing. The ones not marked as *done* are highlighted and linked in T8r. This functionality can be used to add a proofreading step after the translation - or to control which translations should be exported when.
+Translations are created for every phrase and locale - either empty, or prefilled when importing YAML files. The ones not marked as *done* (✓) are highlighted as *untranslated* (ఠ_ఠ). This functionality can be used to add a proofreading step after the translation - or to control which translations are exported.
 
-Editing translations happens in-place. Sorting, filtering and full-text search are availabe.
+__Editing translations happens in-place. Sorting, filtering and full-text search are availabe.__
 
 It is realy simple, this is the full ERD:
 
@@ -18,6 +18,8 @@ It is realy simple, this is the full ERD:
 ## Setup
 
 Like every normal Rails app. Just clone it, bundle, create the databases, migrate, prepare the test database, run the tests with 'rake', start the server and open 'localhost:3000' in your browser.
+
+Then create an app (just provide a name and a unique key) and either add locales, phrases and translations by hand - or import them via existing YAML files (one locale at a time).
 
 I have not tested it yet, but it should run without any issue on a free heroku dyno.
 
@@ -47,11 +49,11 @@ A lot :) Just the most important features that I have in mind:
 
 Like I18n stands for Internationalization and L10n for Localization, T8r stands for Translator.
 
-The first idea for a tool like this I had around the year 2009 / 2010 when coordinating a team of international translators for a browser game.
+The first idea for a translation tool like this I had around the year 2009 / 2010 when coordinating a team of international translators for a browser game.
 The thoughts reemerged, when I was working for a translation provider - and again not 100% happy with the provided tools.
-But finally, at my current employer, I really feel the pain. The tool we have to use is one of the slowest (and oldest) web based tools I every worked with.
+But finally, at my current employer, I really feel the pain. The tool we have to use is one of the slowest (and oldest) web based tools I've ever worked with.
 
-So, while T8r is meant to be a lightweight app, that nevertheless satisfies all the more important needs, it is also directed to be a potential in-house alternative for the current system. This might influence the feature road-map.
+While T8r is meant to be a lightweight app, that nevertheless satisfies all the more important needs, it is also meant to be to be a potential in-house alternative for our current system. This might influence the feature road-map.
 
 
 ## About the author
