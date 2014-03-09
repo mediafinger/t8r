@@ -1,11 +1,11 @@
-{<img src="https://travis-ci.org/mediafinger/t8r.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mediafinger/t8r]
+![Travis-CI Build Status](https://travis-ci.org/mediafinger/t8r.png?branch=master)
 # T8r README
 
-T8r is a Rails app that supports the I18n / translation process of web apps. It won't do any magic or use dirty tricks, but it wants to be a helpful translation / text ressource management tool. It is aimed at developers, translators and copy-writers.
+T8r is a Rails app that supports the I18n / translation process of web apps. It won't do any magic or use dirty tricks, but it wants to be a helpful translation / text resource management tool. It is aimed at developers, translators and copy-writers.
 
 It has support for multiple *apps* and each app can have it's own set of languages (called *locales* in T8r).
 
-Text ressources (called *phrases* in T8r) are the draft (or master) and provide the unique key, an examplary content and optional hints (e.g. length restrictions, links to webpages or screenshots). They can be created in T8r - or via bulk import from a YAML file.
+Text resources (called *phrases* in T8r) are the draft (or master) and provide the unique key, an examplary content and optional hints (e.g. length restrictions, links to webpages or screenshots). They can be created in T8r - or via bulk import from a YAML file.
 
 Translations are created for every phrase and locale - either empty, or prefilled when importing YAML files. The ones not marked as *done* (✓) are highlighted as *untranslated* (ఠ_ఠ). This functionality can be used to add a proofreading step after the translation - or to control which translations are exported.
 
