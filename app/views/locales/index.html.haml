@@ -11,8 +11,8 @@
     %tr
       %td= link_to locale.name, edit_app_locale_path(@app, locale)
       %td= locale.key
-      %td= link_to 'Add Phrase [T]', new_app_phrase_path(@app)
-      %td= link_to 'Untranslated [T]', app_translations_path(@app, filter: {locale_key: locale.key, done: false})
+      %td= link_to "Add Phrase (#{@app.phrases.count}) [T]", new_app_phrase_path(@app)
+      %td= link_to "Untranslated (#{locale.untranslated_count}) [T]", app_translations_path(@app, filter: {locale_key: locale.key, done: false})
 
   %tr
     %td{:colspan => 2}= page_entries_info @phrases
