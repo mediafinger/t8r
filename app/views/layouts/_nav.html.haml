@@ -2,7 +2,7 @@
 
 .navbar
   %ul.nav
-    - if @app.count = 0
+    - if @app_count = 0
       %li= link_to I18n.t('pages.apps'),           new_app_path
     -else
       %li= link_to I18n.t('pages.apps'),           apps_path
