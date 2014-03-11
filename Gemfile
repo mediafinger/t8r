@@ -17,6 +17,8 @@ gem 'sass-rails',                   '~> 4.0.0'
 gem 'turbolinks',                   '~> 2.2'
 gem 'will_paginate',                '~> 3.0'
 
+# to deploy to heroku
+gem 'rails_12factor'
 
 # to speed Travis-CI up
 group :development, :production do
