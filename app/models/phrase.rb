@@ -30,9 +30,10 @@ class Phrase < ActiveRecord::Base
   end
 
   def update_translations
-    app.locales.each do |locale|
-      t = Translation.where(app_id: app.id, locale_id: locale.id, phrase_id: self.id).first
-      t.update_attributes!(done: false) if t.done
+    return unless self.done
+
+    Translation.by_phrase(self).untranslated.each do |translation|
+      translation.update_attributes!(done: false)
     end
   end
 

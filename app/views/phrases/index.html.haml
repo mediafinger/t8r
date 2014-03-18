@@ -2,9 +2,8 @@
 
 %table
   %tr
-    %td{:colspan => 2}= will_paginate @phrases
-    %td
-    %td{:colspan => 2}= page_entries_info @phrases
+    %td{:colspan => 3}= will_paginate @phrases
+    %td{:colspan => 3}= page_entries_info @phrases
 
   %tr
     %th Key [T]
@@ -12,6 +11,7 @@
     %th Hint [T]
     %th Delete [T]
     %th Translations [T]
+    %th Lektoriert [T]
 
 
   - @phrases.each do |phrase|
@@ -26,10 +26,13 @@
           - klass = translation.done ? "translated" : "untranslated"
           %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
 
+      // Checkbox to mark phrase / master content as lectored == ready for translation
+      %td.dones
+        = best_in_place phrase, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_phrase_path(@app, phrase)
+
   %tr
-    %td{:colspan => 2}= page_entries_info @phrases
-    %td
-    %td{:colspan => 2}= will_paginate @phrases
+    %td{:colspan => 3}= page_entries_info @phrases
+    %td{:colspan => 3}= will_paginate @phrases
 
 %br
 

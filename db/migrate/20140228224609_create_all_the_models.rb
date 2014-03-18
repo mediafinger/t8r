@@ -20,6 +20,7 @@ class CreateAllTheModels < ActiveRecord::Migration
       t.string      :key
       t.text        :value
       t.text        :hint
+      t.boolean     :done,        :default => false
       t.timestamps
     end
     add_index :phrases, :key

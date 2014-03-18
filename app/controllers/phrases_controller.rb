@@ -24,11 +24,11 @@ class PhrasesController < BaseController
   private
 
   def create_params
-    params.require(:phrase).permit(:app_id, :key, :value, :hint)
+    params.require(:phrase).permit(:app_id, :key, :value, :hint, :done)
   end
 
   def update_params
-    params.require(:phrase).permit(:value, :hint)
+    params.require(:phrase).permit(:value, :hint, :done)
   end
 
   def ensure_sort
