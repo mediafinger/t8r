@@ -10,7 +10,7 @@ class ExportController < ApplicationController
     locale   = Locale.find(download_params[:locale])
     phrases  = locale.phrases.order({ key: :asc })
 
-    exporter = Exporter::YAML.new(app: @app, for_xing: true)
+    exporter = Exporter::YAML.new(app: @app, style: :tree)
     @yaml    = exporter.export(locale: locale, phrases: phrases)
 
     send_data @yaml, filename: "#{locale.key.to_s}.yml", :type=> "text/yml; charset=utf-8"

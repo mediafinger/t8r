@@ -1,15 +1,17 @@
 module Exporter
   class YAML
 
-    def initialize(app:, for_xing: false)
-      @app = app
-      @for_xing = for_xing
+    def initialize(app:, style: :tree)
+      @app    = app
+      @style  = style.to_s.downcase
     end
 
     def export(locale:, phrases:)
-      if @for_xing
+      if @style == "xing"
         generate_yaml_for_xing(locale, phrases)
-      else
+      elsif @style == "flat"
+        generate_yaml_flat(locale, phrases)
+      elsif @style == "tree"
         generate_yaml(locale, phrases)
       end
     end
@@ -18,13 +20,15 @@ module Exporter
     private
 
     def generate_yaml(locale, phrases)
-      yaml = ["#{locale.key}:"]
+      translations = {}
 
       phrases.each do |phrase|
-        yaml << "  #{phrase.key}: ! '#{phrase.translations.by_locale(locale).first.value}'"
+        translations[phrase.key] = phrase.translations.by_locale(locale).first.value
       end
 
-      yaml.join("\n")
+      translations = { locale.key => translations.explode }
+
+      ::YAML.dump translations
     end
 
     def generate_yaml_for_xing(locale, phrases)
@@ -37,5 +41,16 @@ module Exporter
 
       yaml.join("\n")
     end
+
+    def generate_yaml_flat(locale, phrases)
+      yaml = ["#{locale.key}:"]
+
+      phrases.each do |phrase|
+        yaml << "  #{phrase.key}: ! '#{phrase.translations.by_locale(locale).first.value}'"
+      end
+
+      yaml.join("\n")
+    end
+
   end
 end
