@@ -5,7 +5,9 @@ module Exporter
       @app = app
     end
 
-    def export(locale:, phrases:)
+    def export(locale:, phrases:, options: {})
+      @only_translated = options[:only_translated]
+
       generate_obc(locale, phrases)
     end
 
@@ -16,7 +18,7 @@ module Exporter
       translations = []
 
       phrases.each do |phrase|
-        translation = phrase.translations.by_locale(locale).translated.first
+        translation = get_translation(phrase, locale)
 
         if translation.present?
           translations << "#{phrase.key}\t#{translation.value}"
@@ -24,6 +26,14 @@ module Exporter
       end
 
       translations.join("\n")
+    end
+
+    def get_translation(phrase, locale)
+      if @only_translated == "true"
+        phrase.translations.by_locale(locale).translated.first
+      else
+        phrase.translations.by_locale(locale).first
+      end
     end
 
   end

@@ -1,5 +1,8 @@
 %h2 YAML file download [T]
 
+%p
+  The exported files will be sorted alphabetically (by the keys) [T]
+
 = form_tag app_export_path(@app), :method => :post, :multipart => true do
 
   .field
@@ -9,6 +12,17 @@
   .field
     = label_tag :format
     = select_tag :format, options_for_select({YAML: :yaml, OBC: :obc})
+
+  .field
+    = label_tag :style, 'YAML only: select the style of the exported YAML: [T]'
+    = select_tag :style, options_for_select({"XING [T]" => :xing, "Tree (default for Rails apps) [T]" => :tree, "Flat [T]" => :flat})
+
+  .field
+    = label_tag :only_translated, 'Do not export unfinished translations [T]'
+    = radio_button_tag(:only_translated, :false)
+    = label_tag :only_translated, :false
+    = radio_button_tag(:only_translated, :true, true)
+    = label_tag :only_translated, :true
 
   .field
     = submit_tag 'Export [T]'

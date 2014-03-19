@@ -11,21 +11,36 @@ class ExportController < ApplicationController
     phrases  = locale.phrases.order({ key: :asc })
 
     if download_params[:format] == "yaml"
-      exporter = Exporter::YAML.new(app: @app, style: :tree)
-      @yaml    = exporter.export(locale: locale, phrases: phrases)
-
-      send_data @yaml, filename: "#{locale.key.to_s}.yml", :type=> "text/yml; charset=utf-8"
-
+      send_yaml(locale, phrases)
     elsif download_params[:format] == "obc"
-      exporter = Exporter::OBC.new(app: @app)
-      @obc     = exporter.export(locale: locale, phrases: phrases)
-
-      send_data @obc, filename: "#{locale.key.to_s}.resource.txt", :type=> "text/txt; charset=utf-8"
+      send_obc(locale, phrases)
     end
   end
 
 
   private
+
+  def send_yaml(locale, phrases)
+    exporter = Exporter::YAML.new(app: @app)
+    @yaml    = exporter.export(
+      locale: locale,
+      phrases: phrases,
+      options: { only_translated: download_params[:only_translated], style: yaml_style }
+    )
+
+    send_data @yaml, filename: "#{locale.key.to_s}.yml", :type=> "text/yml; charset=utf-8"
+  end
+
+  def send_obc(locale, phrases)
+    exporter = Exporter::OBC.new(app: @app)
+    @obc     = exporter.export(
+      locale: locale,
+      phrases: phrases,
+      options: { only_translated: download_params[:only_translated] }
+    )
+
+    send_data @obc, filename: "#{locale.key.to_s}.resource.txt", :type=> "text/txt; charset=utf-8"
+  end
 
   def ensure_app
     @app ||= App.find(params[:app_id])
@@ -35,7 +50,15 @@ class ExportController < ApplicationController
     params.require(:app_id)
     params.require(:locale)
     params.require(:format)
+    params.require(:only_translated)
 
     params
   end
+
+  def yaml_style
+    params.require(:style)
+
+    params[:style].to_s.downcase
+  end
+
 end

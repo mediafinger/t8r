@@ -1,17 +1,18 @@
 module Exporter
   class YAML
 
-    def initialize(app:, style: :tree)
-      @app    = app
-      @style  = style.to_s.downcase
+    def initialize(app:)
+      @app = app
     end
 
-    def export(locale:, phrases:)
-      if @style == "xing"
+    def export(locale:, phrases:, options: {})
+      @only_translated = options[:only_translated]
+
+      if options[:style] == "xing"
         generate_yaml_for_xing(locale, phrases)
-      elsif @style == "flat"
+      elsif options[:style] == "flat"
         generate_yaml_flat(locale, phrases)
-      elsif @style == "tree"
+      elsif options[:style] == "tree"
         generate_yaml(locale, phrases)
       end
     end
@@ -23,7 +24,11 @@ module Exporter
       translations = {}
 
       phrases.each do |phrase|
-        translations[phrase.key] = phrase.translations.by_locale(locale).first.value
+        translation = get_translation(phrase, locale)
+
+        if translation.present?
+          translations[phrase.key] = translation.value
+        end
       end
 
       translations = { locale.key => translations.explode }
@@ -36,7 +41,11 @@ module Exporter
       yaml << "#{locale.key}: !omap"
 
       phrases.each do |phrase|
-        yaml << "- #{phrase.key}: ! '#{phrase.translations.by_locale(locale).first.value}'"
+        translation = get_translation(phrase, locale)
+
+        if translation.present?
+          yaml << "- #{phrase.key}: ! '#{translation.value}'"
+        end
       end
 
       yaml.join("\n")
@@ -46,10 +55,24 @@ module Exporter
       yaml = ["#{locale.key}:"]
 
       phrases.each do |phrase|
-        yaml << "  #{phrase.key}: ! '#{phrase.translations.by_locale(locale).first.value}'"
+        translation = get_translation(phrase, locale)
+
+        puts "TRANSLATION: translation.inspect"
+
+        if translation.present?
+          yaml << "  #{phrase.key}: ! '#{translation.value}'"
+        end
       end
 
       yaml.join("\n")
+    end
+
+    def get_translation(phrase, locale)
+      if @only_translated == "true"
+        phrase.translations.by_locale(locale).translated.first
+      else
+        phrase.translations.by_locale(locale).first
+      end
     end
 
   end
