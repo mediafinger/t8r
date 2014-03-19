@@ -21,6 +21,7 @@
   - klass = @translation.done ? "translated" : "untranslated"
   %span(class = klass)=  @translation.done
 
-= link_to 'Edit [T]', edit_app_translation_path(@app, @translation)
-\|
-= link_to 'List of translations [T]', app_translations_path(@app)
+
+%h4 List of all translations [T]
+= form_tag(app_translation_path(@app, @translation), method: :get) do
+  = render 'list', translations: @translation.phrase.translations, with_filter: false
