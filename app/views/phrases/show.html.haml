@@ -10,6 +10,10 @@
 %p
   %strong Hint: [T]
   = @phrase.hint
+%p
+  %strong Done: [T]
+  - klass = @phrase.done ? "translated" : "untranslated"
+  %span(class = klass)=  @phrase.done
 
 = link_to 'Edit [T]', edit_app_phrase_path(@app, @phrase)
 \|
