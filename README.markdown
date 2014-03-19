@@ -5,15 +5,18 @@ T8r is a Rails app that supports the I18n / translation process of web apps. It 
 
 It has support for multiple *apps* and each app can have it's own set of languages (called *locales* in T8r).
 
-Text resources (called *phrases* in T8r) are the draft (or master) and provide the unique key, an examplary content and optional hints (e.g. length restrictions, links to webpages or screenshots). They can be created in T8r - or via bulk import from a YAML file.
+Text resources (called *phrases* in T8r) provide the unique key, the 'master content' and optional hints (e.g. length restrictions, links to webpages or screenshots). They can be created in T8r - or via bulk import from a YAML file (or other formats).
 
-Translations are created for every phrase and locale - either empty, or prefilled when importing YAML files. The ones not marked as *done* (✓) are highlighted as *untranslated* (ఠ_ఠ). This functionality can be used to add a proofreading step after the translation - or to control which translations are exported.
+Translations are created for every phrase and locale - either empty, or prefilled when importing text resource files. The ones not marked as *done* (✓) are highlighted as *untranslated* (ఠ_ఠ). This functionality can be used to add a proofreading step after the translation and to control which translations are exported.
 
 __Editing translations happens in-place. Sorting, filtering and full-text search are availabe.__
+
+The translations can be export as YAML, or as tab separated key value text files.
 
 It is realy simple, this is the full ERD:
 
 ![ERD](https://github.com/mediafinger/t8r/raw/master/t8r_erd.png)
+
 
 ## Setup
 
@@ -33,15 +36,22 @@ It uses Puma as server and Postgres as database, but these could easily be excha
 There are no external dependencies
 
 
+## Exporters and Importers
+
+A translation management tool needs support for many different file formats. T8r is easily expandable to support more file formats.
+
+Several might be added soon - but if you need to support another format, ping me or send me a pull request!
+
+
 ## ToDo
 
 A lot :) Just the most important features that I have in mind:
 
 *  JSON REST API for all important functionality, including bulk-imports
 *  Frontend design
-*  Configurable import and export
-*  Import of files in other formats
-*  Export of files in other formats
+*  Specs
+*  Import of files in other formats than YAML and tab separated key value files (e.g. Android and iOS)
+*  Export of files in other formats than YAML and tab separated key value files (e.g. Android and iOS)
 *  (maybe) a User Rights System or Role System
 
 
