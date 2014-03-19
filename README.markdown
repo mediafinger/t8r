@@ -1,4 +1,5 @@
-![Travis-CI Build Status](https://travis-ci.org/mediafinger/t8r.png?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/mediafinger/t8r.png?branch=master)](https://travis-ci.org/mediafinger/t8r)
+
 # T8r README
 
 T8r is a Rails app that supports the I18n / translation process of web apps. It won't do any magic or use dirty tricks, but it wants to be a helpful translation / text resource management tool. It is aimed at developers, translators and copy-writers.
