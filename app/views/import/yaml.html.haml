@@ -1,0 +1,15 @@
+%h2 YAML file upload [T]
+
+%p
+  Uploading a file will: [T]
+  %ul
+    %li create the locale, if it does not exist yet [T]
+    %li will set the master content, if it does not exist yet [T]
+    %li More options below: [T]
+
+= form_tag app_import_yaml_path(@app), :method => :post, :multipart => true do
+
+  = render 'form', choose_locale: false
+
+  .field
+    = submit_tag 'Import [T]'

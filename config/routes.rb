@@ -6,9 +6,12 @@ T8r::Application.routes.draw do
     resources :phrases,       only: [:index, :show, :edit, :new, :update, :create, :destroy]
     resources :translations,  only: [:index, :show, :edit, :new, :update, :create]
 
-    get   'import'                => 'import#show'
-    post  'import/upload_yaml'    => 'import#upload_yaml'
+    get   'import/yaml'           => 'import#yaml'
+    post  'import/yaml'           => 'import#upload_yaml'
+    get   'import/obc'            => 'import#obc'
+    post  'import/obc'            => 'import#upload_obc'
     get   'export'                => 'export#show'
-    post  'export/download_yaml'  => 'export#download_yaml'
+    post  'export/yaml'           => 'export#download_yaml'
+    # post  'export/obc'            => 'export#download_obc'
   end
 end

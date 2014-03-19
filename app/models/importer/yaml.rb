@@ -1,11 +1,14 @@
 module Importer
   class YAML
 
-    def initialize(app:, content:, import_translations: false, set_as_translated: false)
+    def initialize(app:, content:, options: {})
       @app                 = app
-      @import_translations = import_translations
-      @set_as_translated   = set_as_translated
       @yaml                = content
+
+      @import_translations = options[:import_translations]
+      @set_as_lectored     = options[:set_as_lectored]
+      @set_as_translated   = options[:set_as_translated]
+      @use_as_phrase       = options[:use_as_phrase]
     end
 
     def import
@@ -47,14 +50,12 @@ module Importer
     def save_phrase(key, value)
       phrase = Phrase.where(app: @app, key: key).first_or_initialize
 
-      if phrase.new_record?
-        phrase.key_is_valid = true        # skip validation to save key with dots
-        phrase.value = value
-        phrase.save!
-        phrase
-      else
-        phrase
-      end
+      phrase.key_is_valid = true    # skip validation to save key with dots
+      phrase.value        = value   if phrase.new_record? || @use_as_phrase
+      phrase.done         = @set_as_lectored
+      phrase.save!
+
+      phrase
     end
 
     def save_translation(phrase, value)

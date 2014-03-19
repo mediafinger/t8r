@@ -1,0 +1,36 @@
+.field
+  = label_tag :file, 'Text ressources to import [T]'
+  = file_field_tag :file
+
+.field
+  = label_tag :use_as_phrase, 'Use uploaded string as master content for the phrases [T]'
+  = radio_button_tag(:use_as_phrase, :true)
+  = label_tag :use_as_phrase, :true
+  = radio_button_tag(:use_as_phrase, :false, true)
+  = label_tag :use_as_phrase, :false
+
+.field
+  = label_tag :set_as_lectored, 'Mark imported keys (phrases) as lectored [T]'
+  = radio_button_tag(:set_as_lectored, :true, true)
+  = label_tag :set_as_lectored, :true
+  = radio_button_tag(:set_as_lectored, :false)
+  = label_tag :set_as_lectored, :false
+
+.field
+  = label_tag :import_translations, 'Import not only master content, but also translations [T]'
+  = radio_button_tag(:import_translations, :false, true)
+  = label_tag :import_translations, :false
+  = radio_button_tag(:import_translations, :true)
+  = label_tag :import_translations, :true
+
+- if choose_locale
+  .field
+    = label_tag :set_locale, 'Import translations for this language (locale key in ISO-CODE format) [T]'
+    = text_field_tag :set_locale
+
+.field
+  = label_tag :set_as_translated, 'When importing translations, mark them as translated [T]'
+  = radio_button_tag(:set_as_translated, :true, true)
+  = label_tag :set_as_translated, :true
+  = radio_button_tag(:set_as_translated, :false)
+  = label_tag :set_as_translated, :false
