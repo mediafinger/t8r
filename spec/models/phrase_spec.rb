@@ -54,7 +54,7 @@ describe Phrase do
       translation = Translation.by_phrase(phrase).by_locale(deutsch).first
 
       translation.update_attributes!(value: "Ist so", done: true)
-      phrase.update_attributes!(value: "Something else")
+      phrase.update_attributes!(value: "Something else", done: true)
 
       translation.reload.done.should == false
     end

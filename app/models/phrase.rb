@@ -32,7 +32,7 @@ class Phrase < ActiveRecord::Base
   def update_translations
     return unless self.done
 
-    Translation.by_phrase(self).untranslated.each do |translation|
+    Translation.by_phrase(self).translated.each do |translation|
       translation.update_attributes!(done: false)
     end
   end
