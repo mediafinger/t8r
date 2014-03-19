@@ -8,7 +8,7 @@ defaults: &defaults
   pool: 16
   # timeout: 3000
   # host: localhost
-  #port: 5432
+  # port: 5432
   <<: *postgresql
 
 development:
@@ -18,7 +18,7 @@ development:
 
 test:
   database: t8r_test
-  min_messages: log
+  min_messages: warning
   <<: *defaults
 
 production:
@@ -29,5 +29,6 @@ production:
 # Minimum log levels, in increasing order:
 #   debug5, debug4, debug3, debug2, debug1,
 #   log, notice, warning, error, fatal, and panic
-# Defaults to warning.
-#min_messages: notice
+# Defaults to:
+# min_messages: warning
+
