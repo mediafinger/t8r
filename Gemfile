@@ -11,6 +11,7 @@ gem 'pg',                           '~> 0.17'
 # If using a mysql database, uncomment the following line and comment the "gem pg" line
 # gem 'mysql2',                     '0.3.13'
 
+gem "active_model_serializers",     '~> 0.8.1'
 gem 'best_in_place',                :git => 'git://github.com/bernat/best_in_place.git', :branch => 'rails-4'
 gem 'bootstrap-sass',               '~> 3.1.1'
 gem 'coffee-rails',                 '~> 4.0'

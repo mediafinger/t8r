@@ -3,7 +3,18 @@ class ExportController < ApplicationController
   respond_to    :html, :json
 
   def show
-    @locales ||= @app.locales.order(key: :asc).pluck(:key, :id)
+    respond_to do |format|
+      format.html { @locales ||= @app.locales.order(key: :asc).pluck(:key, :id) }
+
+      format.json do
+        if json_locale.present?
+          translations = @app.translations.by_locale(json_locale).translated
+          render json: translations, each_serializer: TranslationsSerializer, root: false
+        else
+          render json: "Locale #{params[:locale]} does not exist for this app [T]"
+        end
+      end
+    end
   end
 
   def download
@@ -59,6 +70,12 @@ class ExportController < ApplicationController
     params.require(:style)
 
     params[:style].to_s.downcase
+  end
+
+  def json_locale
+    params.require(:locale)
+
+    @app.locales.where(key: params[:locale]).first
   end
 
 end
