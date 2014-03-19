@@ -2,4 +2,7 @@
 
 = render 'form', :phrase => @phrase
 
-= link_to 'List of phrases [T]', app_phrases_path(@app)
+
+%h4 List of all translations [T]
+= form_tag(edit_app_phrase_path(@app, @phrase), method: :get) do
+  = render 'translations/list', translations: @phrase.translations, with_filter: false
