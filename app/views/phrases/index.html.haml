@@ -16,7 +16,7 @@
 
   - @phrases.each do |phrase|
     %tr
-      %td= link_to phrase.key, edit_app_phrase_path(@app, phrase)
+      %td= link_to phrase.key, app_phrase_path(@app, phrase)
       %td= phrase.value
       %td= phrase.hint
       %td= link_to I18n.t('shared.delete'), [@app, phrase], method: :delete, data: { confirm: 'Are you sure? [T]' }
