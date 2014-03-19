@@ -1,6 +1,7 @@
 module Importer
   class OBC
 
+    # Matchers for the lines of the imported file
     COMMENT   = /^#.*/
     KEY_VALUE = /^(\w+)\s+(.*)/
     TEXT      = /^\s+(.*)/
