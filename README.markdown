@@ -12,7 +12,8 @@ Translations are created for every phrase and locale - either empty, or prefille
 
 __Editing translations happens in-place. Sorting, filtering and full-text search are availabe.__
 
-The translations can be export as YAML, or as tab separated key value text files.
+The translations can be export as YAML, or as tab separated key value text files, or as JSON. Just query
+`apps/:id/export/:locale_key.json` (e.g.: "localhost:3000/apps/1/export/en.json")
 
 It is realy simple, this is the full ERD:
 
