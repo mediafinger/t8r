@@ -7,7 +7,8 @@ class Locale < ActiveRecord::Base
   validates :app,   presence: true
   validates :key,   presence: true,  uniqueness: { scope: :app }
 
-  after_create :create_translations
+  before_create :set_name
+  after_create  :create_translations
 
   def untranslated
     translations.joins(:phrase).where(done: false)
@@ -29,5 +30,12 @@ class Locale < ActiveRecord::Base
 
   def to_json(options = {})
     { app: app.key, name: name, key: key }.to_json
+  end
+
+
+  private
+
+  def set_name
+    self.name = self.key  unless self.name.present?
   end
 end
