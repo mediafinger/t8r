@@ -8,6 +8,9 @@ gem 'puma',                         '~> 2.8'
 gem 'rails',                        '= 4.0.3'
 gem 'pg',                           '~> 0.17'
 
+# If using a mysql database, uncomment the following line and comment the "gem pg" line
+# gem 'mysql2',                     '0.3.13'
+
 gem 'best_in_place',                :git => 'git://github.com/bernat/best_in_place.git', :branch => 'rails-4'
 gem 'bootstrap-sass',               '~> 3.1.1'
 gem 'coffee-rails',                 '~> 4.0'

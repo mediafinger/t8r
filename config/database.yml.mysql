@@ -1,0 +1,28 @@
+mysql2: &mysql2
+  adapter: mysql2
+  encoding: unicode
+  username: <%= ENV['T8R_DB_USERNAME_MYSQL'] %>
+  password: <%= ENV['T8R_DB_PASSWORD_MYSQL'] %>
+
+defaults: &defaults
+  encoding: utf8
+  reconnect: true
+  pool: 5
+  <<: *mysql2
+
+development:
+  database: t8r_development
+  host: 127.0.0.1
+  <<: *defaults
+
+development_sandbox:
+  <<: *development
+
+test:
+  database: t8r_test
+  host: 127.0.0.1
+  <<: *defaults
+
+production:
+  database: t8r_production
+  <<: *defaults
