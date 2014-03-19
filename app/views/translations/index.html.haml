@@ -11,6 +11,7 @@
       %td{:colspan => 3}= page_entries_info @phrases
 
 
+    / Headers incl. links for sorting
     %tr
       %th.keys
         = link_to I18n.t('shared.key'),          app_translations_path(@app, sort: {phrase_key: :asc})
@@ -29,6 +30,7 @@
         = link_to "▼",                          app_translations_path(@app, sort: {done: :desc})
 
 
+    / Filtering
     %tr
       %td.keys
         = text_field_tag "filter[phrase_key]",    @filter["phrase_key"], {  placeholder: I18n.t('views.placeholder_search_key'), size: 40 }

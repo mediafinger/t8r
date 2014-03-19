@@ -18,9 +18,9 @@
 
 .field
   = label_tag :import_translations, 'Import not only master content, but also translations [T]'
-  = radio_button_tag(:import_translations, :false, true)
+  = radio_button_tag(:import_translations, :false)
   = label_tag :import_translations, :false
-  = radio_button_tag(:import_translations, :true)
+  = radio_button_tag(:import_translations, :true, true)
   = label_tag :import_translations, :true
 
 - if choose_locale
