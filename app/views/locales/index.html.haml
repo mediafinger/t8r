@@ -1,23 +1,26 @@
-%h1 Listing locales [T]
-
-%table
-  %tr
-    %th Name [T]
-    %th Key [T]
-    %th Add Phrase [T]
-    %th Translate [T]
-
-  - @locales.each do |locale|
+- if @locales.present?
+  %table
     %tr
-      %td= link_to locale.name, edit_app_locale_path(@app, locale)
-      %td= locale.key
-      %td= link_to "Add Phrase (#{@app.phrases.count}) [T]", new_app_phrase_path(@app)
-      %td= link_to "Untranslated (#{locale.untranslated_count}) [T]", app_translations_path(@app, filter: {locale_key: locale.key, done: false})
+      %th Name [T]
+      %th Key [T]
+      %th Add Phrase [T]
+      %th Translate [T]
 
-  %tr
-    %td{:colspan => 2}= page_entries_info @phrases
-    %td{:colspan => 2}= will_paginate @phrases
+    - @locales.each do |locale|
+      %tr
+        %td= link_to locale.name, edit_app_locale_path(@app, locale)
+        %td= locale.key
+        %td= link_to "Add Phrase (#{@app.phrases.count}) [T]", new_app_phrase_path(@app)
+        %td= link_to "Untranslated (#{locale.untranslated_count}) [T]", app_translations_path(@app, filter: {locale_key: locale.key, done: false})
 
-%br
+    %tr
+      %td{:colspan => 2}= page_entries_info @phrases
+      %td{:colspan => 2}= will_paginate @phrases
 
-%p= link_to "New locale [T]", new_app_locale_path(@app)
+- else
+  .jumbotron
+    %h1
+      No locales [T]
+    %p
+      Maybe you would like to create one? [T]
+    %p= link_to "New locale [T]", new_app_locale_path(@app), class: 'btn btn-primary btn-lg'
