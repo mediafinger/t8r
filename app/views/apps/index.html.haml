@@ -6,6 +6,7 @@
     %th Key [T]
     %th
     %th Add Phrase [T]
+    %th
     %th Translate [T]
 
   - @apps.each do |app|
@@ -14,12 +15,17 @@
       %td= app.key
       %td= link_to "Edit [T]", edit_app_path(app)
       %td= link_to "Add Phrase (#{app.phrases.count}) [T]", new_app_phrase_path(app)
-      %td= link_to "Untranslated (#{app.translations.untranslated_count}) [T]", app_translations_path(app, filter: {done: false})
+      %td= link_to 'Export [T]', app_export_path(app)
+      %td
+        - app.locales.order(key: :asc).each do |locale|
+          - count = locale.untranslated_count
+          - klass = (count > 0) ? "untranslated" : "translated"
+          %span(class = klass)= link_to "#{locale.key} (#{count})", app_translations_path(app, filter: {locale_key: locale.key, done: false})
 
   %tr
     %td{:colspan => 2}= page_entries_info @phrases
     %td
-    %td{:colspan => 2}= will_paginate @phrases
+    %td{:colspan => 3}= will_paginate @phrases
 
 %br
 
