@@ -1,4 +1,6 @@
 - if @phrases.active.present?
+  .container
+    %p.text-right= link_to "New phrase [T]", new_app_phrase_path(@app), class: 'btn btn-primary'
 
   = render 'list', phrases: @phrases.active, with_filter: true
 
