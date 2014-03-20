@@ -55,6 +55,28 @@ td, th {
   padding: 0 2px 0 2px;
 }
 
+.apps {
+  margin: 2em 0;
+}
+.app {
+  padding: 0.5em 0;
+  &:hover {
+    background-color: #f9f9f9;
+  }
+  h3 {
+    margin-top: 0;
+  }
+  .actions {
+    margin-top: 1em;
+  }
+  .label {
+    font-size: 1em;
+    a {
+      color: white;
+    }
+  }
+}
+
 .untranslated {
   @include border-radius(1em);
 

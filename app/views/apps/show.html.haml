@@ -4,11 +4,3 @@
 %p
   %strong Key: [T]
   = @app.key
-
-= link_to "Edit [T]", edit_app_path(@app)
-\|
-= link_to 'Import YAML file [T]', app_import_yaml_path(@app)
-\|
-= link_to 'Import OBC file [T]', app_import_obc_path(@app)
-\|
-= link_to 'Export text resources to file [T]', app_export_path(@app)
