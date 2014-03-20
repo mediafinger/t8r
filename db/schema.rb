@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140307063008) do
     t.integer  "app_id"
     t.text     "name"
     t.text     "key"
+    t.boolean  "hidden",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140307063008) do
     t.text     "value"
     t.text     "hint"
     t.boolean  "done",       default: false
+    t.boolean  "hidden",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -54,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140307063008) do
     t.integer  "phrase_id"
     t.text     "value"
     t.boolean  "done",       default: false
+    t.boolean  "hidden",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

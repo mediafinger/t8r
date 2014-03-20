@@ -9,9 +9,11 @@ class Translation < ActiveRecord::Base
 
   scope :by_locale,           lambda { |locale| where(locale_id: locale.id) }
   scope :by_phrase,           lambda { |phrase| where(phrase_id: phrase.id) }
-  scope :translated,          -> { where(done: true) }
-  scope :untranslated,        -> { where(done: false) }
-  scope :untranslated_count,  -> { untranslated.count }
+  scope :active,              -> { where(hidden: false) }
+  scope :translated,          -> { where(done: true)    }
+  scope :untranslated,        -> { where(done: false)   }
+  scope :untranslated_count,  -> { untranslated.count   }
+
 
   def untranslated?
     !done

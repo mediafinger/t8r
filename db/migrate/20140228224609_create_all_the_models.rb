@@ -11,6 +11,7 @@ class CreateAllTheModels < ActiveRecord::Migration
       t.integer     :app_id
       t.string      :name
       t.string      :key
+      t.boolean     :hidden,      :default => false
       t.timestamps
     end
     add_index :locales, :key
@@ -21,6 +22,7 @@ class CreateAllTheModels < ActiveRecord::Migration
       t.text        :value
       t.text        :hint
       t.boolean     :done,        :default => false
+      t.boolean     :hidden,      :default => false
       t.timestamps
     end
     add_index :phrases, :key
@@ -31,6 +33,7 @@ class CreateAllTheModels < ActiveRecord::Migration
       t.integer     :phrase_id
       t.text        :value
       t.boolean     :done,        :default => false
+      t.boolean     :hidden,      :default => false
       t.timestamps
     end
     add_index :translations, :done

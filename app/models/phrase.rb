@@ -9,7 +9,15 @@ class Phrase < ActiveRecord::Base
   validates :key,     presence: true,  uniqueness: { scope: :app }
 
   after_create :create_translations
-  after_update :update_translations
+  after_update :invalidate_translations
+  after_update :hide_translations
+
+  scope :active,            -> { where(hidden: false) }
+  scope :archived,          -> { where(hidden: true)  }
+  scope :verified,          -> { where(done: true)    }
+  scope :unverified,        -> { where(done: false)   }
+  scope :unverified_count,  -> { untranslated.count   }
+
 
   def untranslated
     translations.joins(:locale).where(done: false)
@@ -29,11 +37,26 @@ class Phrase < ActiveRecord::Base
     end
   end
 
-  def update_translations
+  def invalidate_translations
+    return unless self.done_changed? || self.value_changed?
     return unless self.done
 
     Translation.by_phrase(self).translated.each do |translation|
       translation.update_attributes!(done: false)
+    end
+  end
+
+  def hide_translations
+    return unless self.hidden_changed?
+
+    if self.hidden?
+      self.translations.active.each do |translation|
+        translation.update_attributes!(hidden: true)
+      end
+    else
+      self.translations.each do |translation|
+        translation.update_attributes!(hidden: false)
+      end
     end
   end
 

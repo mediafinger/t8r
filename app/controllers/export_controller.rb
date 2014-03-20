@@ -8,7 +8,7 @@ class ExportController < ApplicationController
 
       format.json do
         if json_locale.present?
-          translations = @app.translations.by_locale(json_locale).translated
+          translations = @app.translations.by_locale(json_locale).translated.active
           render json: translations, each_serializer: TranslationsSerializer
         else
           render json: "Locale #{params[:locale]} does not exist for this app [T]"
@@ -75,7 +75,7 @@ class ExportController < ApplicationController
   def json_locale
     params.require(:locale)
 
-    @app.locales.where(key: params[:locale]).first
+    @app.locales.where(key: params[:locale]).active.first
   end
 
 end
