@@ -1,38 +1,6 @@
-- if @phrases.present?
-  %table
-    %tr
-      %td{:colspan => 3}= page_entries_info @phrases
-      %td{:colspan => 3}= will_paginate @phrases
+- if @phrases.active.present?
 
-    %tr
-      %th Key [T]
-      %th Value [T]
-      %th Hint [T]
-      %th Delete [T]
-      %th Translations [T]
-      %th Lektoriert [T]
-
-
-    - @phrases.each do |phrase|
-      %tr
-        %td= link_to phrase.key, app_phrase_path(@app, phrase)
-        %td= phrase.value
-        %td= phrase.hint
-        %td= link_to I18n.t('shared.delete'), [@app, phrase], method: :delete, data: { confirm: 'Are you sure? [T]' }
-
-        %td
-          - phrase.translations_ordered_by_locale.each do |translation|
-            - klass = translation.done ? "translated" : "untranslated"
-            %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
-
-        // Checkbox to mark phrase / master content as lectored == ready for translation
-        %td.dones
-          = best_in_place phrase, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_phrase_path(@app, phrase)
-
-    %tr
-      %td{:colspan => 3}= page_entries_info @phrases
-      %td{:colspan => 3}= will_paginate @phrases
-
+  = render 'list', phrases: @phrases.active, with_filter: true
 
 - else
   .jumbotron
