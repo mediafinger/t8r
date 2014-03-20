@@ -31,6 +31,12 @@ class Phrase < ActiveRecord::Base
     translations.joins(:locale).order('locales.key asc')
   end
 
+  def copy_translations_from(phrase)
+    self.translations.each do |translation|
+      translation.update_attributes(value: phrase.translations.where(locale: translation.locale).first.value)
+    end
+  end
+
   def create_translations
     app.locales.each do |locale|
       Translation.create!(app_id: app.id, locale_id: locale.id, phrase_id: self.id)

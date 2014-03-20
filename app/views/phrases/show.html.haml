@@ -18,6 +18,17 @@
   %strong Archived: [T]
   - klass = @phrase.hidden ? "active" : "archived"
   %span(class = klass)= best_in_place @phrase, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_phrase_path(@app, @phrase)
+%p
+  %strong Copy all translations from an other key [T]
+
+  = form_tag copy_translations_from_app_phrase_path(@app, @phrase), :method => :post, :multipart => true do
+    .field
+      = label_tag :other_phrase_key
+      = text_field_tag :other_phrase_key
+    .field
+      = submit_tag 'Export [T]'
+
+
 
 
 %h4 List of all translations [T]

@@ -9,6 +9,13 @@ class PhrasesController < BaseController
   # update  inherited from BaseController
 
 
+  def copy_translations_from
+    @phrase = @app.phrases.find(params[:id])
+    @phrase.copy_translations_from(phrase_to_copy_from)
+
+    render :show
+  end
+
   def destroy
     @phrase = @app.phrases.find(params[:id])
 
@@ -29,6 +36,12 @@ class PhrasesController < BaseController
 
   def update_params
     params.require(:phrase).permit(:value, :hint, :done, :hidden)
+  end
+
+  def phrase_to_copy_from
+    params.require(:other_phrase_key)
+
+    @app.phrases.find_by(key: params[:other_phrase_key])
   end
 
   def ensure_sort

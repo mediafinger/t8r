@@ -3,7 +3,11 @@ T8r::Application.routes.draw do
 
   resources :apps,    only: [:index, :show, :edit, :new, :update, :create] do
     resources :locales,       only: [:index, :show, :edit, :new, :update, :create]
-    resources :phrases,       only: [:index, :show, :edit, :new, :update, :create, :destroy]
+    resources :phrases,       only: [:index, :show, :edit, :new, :update, :create, :destroy] do
+      member do
+        post 'copy_translations_from'
+      end
+    end
     resources :translations,  only: [:index, :show, :edit, :new, :update, :create]
 
     match 'import/yaml',      to: 'import#yaml',          via: :get
