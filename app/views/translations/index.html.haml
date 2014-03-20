@@ -4,7 +4,7 @@
 
   = form_tag(app_translations_path(@app), method: :get) do
 
-    = render 'list', translations: @translations, with_filter: true
+    = render 'list', translations: @translations.active, with_filter: true
 
 - else
   .jumbotron
