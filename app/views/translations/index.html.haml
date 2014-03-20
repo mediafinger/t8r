@@ -2,6 +2,10 @@
   // Reload page every 15 minutes
   %meta(http-equiv="refresh" content="900")
 
+  .container
+    %p.text-right= link_to "New phrase [T]", new_app_phrase_path(@app), class: 'btn btn-primary'
+
+
   = form_tag(app_translations_path(@app), method: :get) do
 
     = render 'list', translations: @translations.active, with_filter: true, can_archive: false
