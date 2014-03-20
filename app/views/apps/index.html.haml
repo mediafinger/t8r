@@ -4,34 +4,9 @@
 
   .container.apps
     - @apps.each do |app|
-      .row.app
-        .col-xs-8
-          %h3
-            = link_to app.name, app_phrases_path(app)
-            %small= app.key
-          %p
-            = "#{app.phrases.count} phrases"
-            - app.locales.order(key: :asc).each do |locale|
-              - count = locale.untranslated_count
-              - klass = (count > 0) ? "label-warning" : "label-default"
-              - label = locale.key.dup
-              - label << " – #{count}" if count > 0
-              %span.label(class = klass)= link_to label, app_translations_path(app, filter: {locale_key: locale.key, done: false})
 
-        .col-xs-4.text-right
-          .btn-group.actions
-            = link_to "Add Phrase [T]", new_app_phrase_path(app), class: 'btn btn-success'
-            .btn-group
-              %button.btn.btn-default.dropdown-toggle(type="button" id="dropdownMenu1" data-toggle="dropdown")
-                More…
-                %span.caret
-              %ul.dropdown-menu.text-left
-                %li= link_to "Edit [T]", edit_app_path(app)
-                %li.divider
-                %li= link_to 'Export [T]', app_export_path(app)
-                %li.divider
-                %li= link_to 'Import YAML [T]', app_import_yaml_path(app)
-                %li= link_to 'Import OBC [T]', app_import_obc_path(app)
+      = render 'dashboard', app: app
+
 
   .container
     .row
