@@ -8,14 +8,11 @@ class ImportController < ApplicationController
   def upload_yaml
     content = YAML::load(upload_params[:file].read)
 
-    @yaml = Importer::YAML.new(
+    ImportYAMLJob.new.async.perform(
       app:      App.find(upload_params[:app_id]),
       content:  content,
       options:  options
     )
-
-    # TODO: move to background process
-    @yaml.import
 
     render :yaml, status: :ok
   end
@@ -23,14 +20,11 @@ class ImportController < ApplicationController
   def upload_obc
     content = upload_params[:file].read
 
-    @obc = Importer::OBC.new(
+    ImportOBCJob.new.async.perform(
       app:     App.find(upload_params[:app_id]),
       content: content,
       options: options.merge(set_locale: obc_locale)
     )
-
-    # TODO: move to background process
-    @obc.import
 
     render :obc, status: :ok
   end

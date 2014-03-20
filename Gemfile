@@ -17,6 +17,7 @@ gem 'bootstrap-sass',               '~> 3.1.1'
 gem 'coffee-rails',                 '~> 4.0'
 gem 'haml-rails',                   '~> 0.5'
 gem 'sass-rails',                   '~> 4.0.0'
+gem 'sucker_punch',                 '~> 1.0'
 gem 'turbolinks',                   '~> 2.2'
 gem 'will_paginate',                '~> 3.0'
 
