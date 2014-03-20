@@ -1,5 +1,4 @@
-%h1 New phrase [T]
+.col-sm-offset-2.col-sm-10
+  %h1 New phrase in #{@app.name} [T]
 
 = render 'form', :phrase => @phrase
-
-= link_to 'List of phrases [T]', app_phrases_path(@app)
