@@ -3,14 +3,12 @@
   = "#{@app.key} / #{@app.name}"
 %p
   %strong Name: [T]
-  = @locale.name
+  = best_in_place @locale, :name, :type => :input, :path => app_locale_path(@app, @locale), nil: "<span class='translation-placeholder'>#{@locale.key}</span>"
 %p
   %strong Key: [T]
   = @locale.key
 
-= link_to 'Edit [T]', edit_app_locale_path(@app, @locale)
-\|
-= link_to 'Back [T]', app_locales_path(@app)
+
 %h4 List of all ARCHIVED phrases [T]
 = form_tag(app_locale_path(@app, @locale), method: :get) do
   = render 'phrases/list', phrases: @locale.phrases.archived.page(params[:page]), with_filter: false
