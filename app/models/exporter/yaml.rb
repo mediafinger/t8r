@@ -6,7 +6,7 @@ module Exporter
     end
 
     def export(locale:, phrases:, options: {})
-      @only_translated = options[:only_translated]
+      @only_translated = options[:only_translated] == "true"
 
       if options[:style] == "xing"
         generate_yaml_for_xing(locale, phrases)
@@ -68,7 +68,7 @@ module Exporter
     end
 
     def get_translation(phrase, locale)
-      if @only_translated == "true"
+      if @only_translated
         phrase.translations.by_locale(locale).translated.first
       else
         phrase.translations.by_locale(locale).first

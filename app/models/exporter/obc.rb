@@ -6,7 +6,7 @@ module Exporter
     end
 
     def export(locale:, phrases:, options: {})
-      @only_translated = options[:only_translated]
+      @only_translated = options[:only_translated] == "true"
 
       generate_obc(locale, phrases)
     end
@@ -29,7 +29,7 @@ module Exporter
     end
 
     def get_translation(phrase, locale)
-      if @only_translated == "true"
+      if @only_translated
         phrase.translations.by_locale(locale).translated.first
       else
         phrase.translations.by_locale(locale).first
