@@ -28,7 +28,7 @@ class PhrasesController < BaseController
   end
 
   def update_params
-    params.require(:phrase).permit(:value, :hint, :done)
+    params.require(:phrase).permit(:value, :hint, :done, :hidden)
   end
 
   def ensure_sort

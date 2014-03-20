@@ -7,8 +7,13 @@
 %p
   %strong Key: [T]
   = @locale.key
+%p
+  %strong Archived: [T]
+  - klass = @locale.hidden ? "active" : "archived"
+  %span(class = klass)= best_in_place @locale, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_locale_path(@app, @locale)
+
 
 
 %h4 List of all ARCHIVED phrases [T]
 = form_tag(app_locale_path(@app, @locale), method: :get) do
-  = render 'phrases/list', phrases: @locale.phrases.archived.page(params[:page]), with_filter: false
+  = render 'phrases/list', phrases: @locale.phrases.archived.page(params[:page]), with_filter: false, can_archive: true

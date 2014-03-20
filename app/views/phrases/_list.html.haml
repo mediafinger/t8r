@@ -9,7 +9,7 @@
     %th Hint [T]
     %th Delete [T]
     %th Translations [T]
-    %th Lektoriert [T]
+    %th Verified [T]
 
 
   - phrases.each do |phrase|
@@ -24,7 +24,7 @@
           - klass = translation.done ? "translated" : "untranslated"
           %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
 
-      // Checkbox to mark phrase / master content as lectored == ready for translation
+      // Checkbox to mark phrase / master content as verified == ready for translation
       %td.dones
         = best_in_place phrase, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_phrase_path(@app, phrase)
 

@@ -4,11 +4,12 @@
 
     / Pagination
     %tr
-      %td{:colspan => 2}= will_paginate translations
+      %td{:colspan => 3}= will_paginate translations
       %td{:colspan => 3}= page_entries_info translations
 
     / Headers incl. links for sorting
     %tr
+      %th
       %th.keys
         = link_to I18n.t('shared.key'),          app_translations_path(@app, sort: {phrase_key: :asc})
         = link_to "▼",                          app_translations_path(@app, sort: {phrase_key: :desc})
@@ -28,6 +29,7 @@
 
     / Filtering
     %tr
+      %td
       %td.keys
         = text_field_tag "filter[phrase_key]",    @filter["phrase_key"], {  placeholder: I18n.t('views.placeholder_search_key'), size: 40 }
       %td.phrases
@@ -43,6 +45,12 @@
   - translations.each do |translation|
     - klass = translation.done ? "translated" : "untranslated"
     %tr
+      // Optional (only used on Phrase#show) to hide / unhide translations
+      - if can_archive == true
+        // Checkbox to mark translation as hidden
+        %td.dones
+          = best_in_place translation, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_translation_path(@app, translation)
+
       // Phrase key with link to translation's show view - in line below the hint
       %td.keys
         = link_to translation.phrase.key, app_translation_path(@app, translation), { title: translation.phrase.key, rel: translation.phrase.key }

@@ -17,7 +17,7 @@ class TranslationsController < BaseController
   end
 
   def update_params
-    params.require(:translation).permit(:value, :done)
+    params.require(:translation).permit(:value, :done, :hidden)
   end
 
   def ensure_sort

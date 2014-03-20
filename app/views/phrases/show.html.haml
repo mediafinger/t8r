@@ -14,8 +14,12 @@
   %strong Done: [T]
   - klass = @phrase.done ? "translated" : "untranslated"
   %span(class = klass)= best_in_place @phrase, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_phrase_path(@app, @phrase)
+%p
+  %strong Archived: [T]
+  - klass = @phrase.hidden ? "active" : "archived"
+  %span(class = klass)= best_in_place @phrase, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_phrase_path(@app, @phrase)
 
 
 %h4 List of all translations [T]
 = form_tag(app_phrase_path(@app, @phrase), method: :get) do
-  = render 'translations/list', translations: @phrase.translations, with_filter: false
+  = render 'translations/list', translations: @phrase.translations, with_filter: false, can_archive: true
