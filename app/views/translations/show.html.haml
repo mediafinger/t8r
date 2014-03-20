@@ -6,7 +6,7 @@
   = "#{@translation.locale.key} / #{@translation.locale.name}"
 %p
   %strong Phrase-key: [T]
-  = @translation.phrase.key
+  = link_to @translation.phrase.key, app_phrase_path(@app, @translation.phrase)
 %p
   %strong Phrase-hint: [T]
   = @translation.phrase.hint
