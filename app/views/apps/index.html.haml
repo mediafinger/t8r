@@ -14,7 +14,8 @@
             - app.locales.order(key: :asc).each do |locale|
               - count = locale.untranslated_count
               - klass = (count > 0) ? "label-warning" : "label-default"
-              - label = locale.key << (count > 0 ? " – #{count}" : '')
+              - label = locale.key.dup
+              - label << " – #{count}" if count > 0
               %span.label(class = klass)= link_to label, app_translations_path(app, filter: {locale_key: locale.key, done: false})
 
         .col-xs-4.text-right
