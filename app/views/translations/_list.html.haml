@@ -46,9 +46,8 @@
     - klass = translation.done ? "translated" : "untranslated"
     %tr
       // Optional (only used on Phrase#show) to hide / unhide translations
-      - if can_archive == true
-        // Checkbox to mark translation as hidden
-        %td.dones
+      %td
+        - if can_archive == true
           = best_in_place translation, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_translation_path(@app, translation)
 
       // Phrase key with link to translation's show view - in line below the hint
@@ -82,7 +81,7 @@
     / Pagination
     %tr
       %td{:colspan => 2}= page_entries_info translations
-      %td{:colspan => 2}= will_paginate translations
+      %td{:colspan => 3}= will_paginate translations
       %td{:colspan => 1}= submit_tag :search
 
 
