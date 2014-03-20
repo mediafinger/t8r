@@ -1,5 +1,5 @@
 T8r::Application.routes.draw do
-  root                            to: 'pages#home',      via: :get
+  root                            to: 'apps#index',      via: :get
 
   resources :apps,    only: [:index, :show, :edit, :new, :update, :create] do
     resources :locales,       only: [:index, :show, :edit, :new, :update, :create]
@@ -13,4 +13,6 @@ T8r::Application.routes.draw do
     match 'export(/:locale)', to: 'export#show',          via: :get
     match 'export',           to: 'export#download',      via: :post
   end
+
+  match  'home',            to: 'pages#home',           via: :get
 end
