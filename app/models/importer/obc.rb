@@ -11,7 +11,7 @@ module Importer
       @obc                 = content
 
       @import_translations = options[:import_translations]
-      @set_as_lectored     = options[:set_as_lectored]
+      @set_as_verified     = options[:set_as_verified]
       @set_as_translated   = options[:set_as_translated]
       @use_as_phrase       = options[:use_as_phrase]
       @set_locale          = options[:set_locale]
@@ -57,7 +57,7 @@ module Importer
 
       phrase.key_is_valid = true    # skip validation to save key with dots
       phrase.value        = value   if phrase.new_record? || @use_as_phrase
-      phrase.done         = @set_as_lectored
+      phrase.done         = @set_as_verified
       phrase.save!
 
       phrase

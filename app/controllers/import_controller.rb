@@ -45,7 +45,7 @@ class ImportController < ApplicationController
   def options
     {
       import_translations:  upload_params[:import_translations],
-      set_as_lectored:      upload_params[:set_as_lectored],
+      set_as_verified:      upload_params[:set_as_verified],
       set_as_translated:    upload_params[:set_as_translated],
       use_as_phrase:        upload_params[:use_as_phrase]
     }
@@ -55,7 +55,7 @@ class ImportController < ApplicationController
     params.require(:app_id)
     params.require(:file)
     params.require(:import_translations)
-    params.require(:set_as_lectored)
+    params.require(:set_as_verified)
     params.require(:set_as_translated)
     params.require(:use_as_phrase)
 
