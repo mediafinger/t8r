@@ -6,16 +6,14 @@
     %th Key [T]
     %th
     %th Add Phrase [T]
-    %th
     %th Translate [T]
 
   - @apps.each do |app|
     %tr
       %td= link_to app.name, app
       %td= app.key
-      %td= link_to "Edit [T]", edit_app_path(app)
-      %td= link_to "Add Phrase (#{app.phrases.count}) [T]", new_app_phrase_path(app)
       %td= link_to 'Export [T]', app_export_path(app)
+      %td= link_to "Add Phrase (#{app.phrases.count}) [T]", new_app_phrase_path(app)
       %td
         - app.locales.order(key: :asc).each do |locale|
           - count = locale.untranslated_count
