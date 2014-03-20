@@ -1,9 +1,4 @@
-%h1 Editing app [T]
+.col-sm-offset-2.col-sm-10
+  %h2 Editing app [T]
 
 = render 'form', :app => @app
-
-= link_to 'Add Locale [T]', new_app_locale_path(@app)
-\|
-= link_to 'Show [T]', @app
-\|
-= link_to 'List of apps [T]', apps_path
