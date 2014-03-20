@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20140307063008) do
     t.datetime "updated_at"
   end
 
+  add_index "locales", ["hidden"], name: "index_locales_on_hidden", using: :btree
   add_index "locales", ["key"], name: "index_locales_on_key", using: :btree
 
   create_table "phrases", force: true do |t|
@@ -48,6 +49,8 @@ ActiveRecord::Schema.define(version: 20140307063008) do
     t.datetime "updated_at"
   end
 
+  add_index "phrases", ["done"], name: "index_phrases_on_done", using: :btree
+  add_index "phrases", ["hidden"], name: "index_phrases_on_hidden", using: :btree
   add_index "phrases", ["key"], name: "index_phrases_on_key", using: :btree
 
   create_table "translations", force: true do |t|
@@ -62,5 +65,6 @@ ActiveRecord::Schema.define(version: 20140307063008) do
   end
 
   add_index "translations", ["done"], name: "index_translations_on_done", using: :btree
+  add_index "translations", ["hidden"], name: "index_translations_on_hidden", using: :btree
 
 end

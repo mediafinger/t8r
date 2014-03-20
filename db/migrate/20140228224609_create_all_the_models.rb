@@ -15,6 +15,7 @@ class CreateAllTheModels < ActiveRecord::Migration
       t.timestamps
     end
     add_index :locales, :key
+    add_index :locales, :hidden
 
     create_table :phrases do |t|
       t.integer     :app_id
@@ -26,6 +27,8 @@ class CreateAllTheModels < ActiveRecord::Migration
       t.timestamps
     end
     add_index :phrases, :key
+    add_index :phrases, :done
+    add_index :phrases, :hidden
 
     create_table :translations do |t|
       t.integer     :app_id
@@ -37,5 +40,6 @@ class CreateAllTheModels < ActiveRecord::Migration
       t.timestamps
     end
     add_index :translations, :done
+    add_index :translations, :hidden
   end
 end
