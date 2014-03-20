@@ -24,4 +24,4 @@
 
 %h4 List of all translations [T]
 = form_tag(app_translation_path(@app, @translation), method: :get) do
-  = render 'list', translations: @translation.phrase.translations, with_filter: false, can_archive: false
+  = render 'list', translations: @translation.phrase.translations.active, with_filter: false, can_archive: false
