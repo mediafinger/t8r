@@ -1,8 +1,0 @@
-%h1 Editing phrase [T]
-
-= render 'form', :phrase => @phrase
-
-
-%h4 List of all translations [T]
-= form_tag(edit_app_phrase_path(@app, @phrase), method: :get) do
-  = render 'translations/list', translations: @phrase.translations, with_filter: false
