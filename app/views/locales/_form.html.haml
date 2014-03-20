@@ -10,17 +10,18 @@
     = f.hidden_field :app_id, :value => @app.id
 
   .form-group
-    = f.label :name, class: 'col-sm-2 control-label'
-    .col-sm-10
-      = f.text_field :name, class: 'form-control'
-
-  .form-group
     = f.label :key, class: 'col-sm-2 control-label'
     .col-sm-10
       - if locale.new_record?
         = f.text_field :key, class: 'form-control'
       - else
         %p.form-control-static= "#{locale.key}"
+
+  .form-group
+    = f.label :name, class: 'col-sm-2 control-label'
+    .col-sm-10
+      = f.text_field :name, class: 'form-control'
+
 
   .form-group
     .col-sm-offset-2.col-sm-10
