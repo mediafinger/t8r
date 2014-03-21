@@ -1,6 +1,4 @@
-%h2= "Welcome to #{I18n.t 'pages.home'}"
-
-This is a tool for translators :)
+%h2= "#{I18n.t 'pages.home'} - a better translation tool"
 
 %h3 ToDos:
 %ul
@@ -38,3 +36,39 @@ This is a tool for translators :)
   %li Create Phrases that are translated into selected languages only  ✓
   %li Copy Translations into new Keys  ✓
   %li I18n :)  ✓
+
+%br
+%br
+%table
+  %tr
+    %td{:colspan => 4}
+      %h4 t8r was started in my spare time and made the next step during the XING Innovation week 12/2014.
+      %h4 Rich helped out with some great ideas and a nice styling.
+      %br
+      %br
+  %tr
+    %td &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    %td
+      %h4 Rich Barton
+    %td &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    %td
+      %h4 Andreas Finger
+  %tr
+    %td &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    %td
+      = link_to image_tag('https://www.xing.com/pubimg/users/c/6/5/a3c341e08.16869308,2.jpg'), 'https://www.xing.com/pubimg/users/c/6/5/a3c341e08.16869308,2.jpg'
+    %td
+    %td
+      = link_to image_tag('https://www.xing.com/pubimg/users/f/1/c/01cb72194.4227760,7.jpg'), 'https://www.xing.com/pubimg/users/f/1/c/01cb72194.4227760,7.jpg'
+  %tr
+    %td{:colspan => 4}
+      %br
+      %br
+      %br
+  %tr
+    %td{:colspan => 4}
+      %h4 Source code:
+      %h4= link_to "https://source.xing.com/Andreas-Finger/t8r", "https://source.xing.com/Andreas-Finger/t8r"
+      %br
+      %br
+      %br
