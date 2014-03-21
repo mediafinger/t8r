@@ -10,11 +10,12 @@ module Importer
       @app                 = app
       @obc                 = content
 
-      @import_translations = options[:import_translations]
-      @set_as_verified     = options[:set_as_verified]
-      @set_as_translated   = options[:set_as_translated]
-      @use_as_phrase       = options[:use_as_phrase]
       @set_locale          = options[:set_locale]
+
+      @use_as_phrase       = options[:use_as_phrase]        == "true"
+      @set_as_verified     = options[:set_as_verified]      == "true"
+      @import_translations = options[:import_translations]  == "true"
+      @set_as_translated   = options[:set_as_translated]    == "true"
     end
 
     def import
@@ -55,12 +56,16 @@ module Importer
     def save_phrase(key, value)
       phrase = Phrase.where(app: @app, key: key).first_or_initialize
 
-      phrase.key_is_valid = true    # skip validation to save key with dots
-      phrase.value        = value   if phrase.new_record? || @use_as_phrase
-      phrase.done         = @set_as_verified
-      phrase.save!
+      if phrase.new_record? || @use_as_phrase
+        phrase.key_is_valid = true    # skip validation to save key with dots
+        phrase.value        = value
+        phrase.done         = @set_as_verified
+        phrase.save!
 
-      phrase
+        phrase
+      else
+        phrase
+      end
     end
 
     def save_translation(phrase, value)

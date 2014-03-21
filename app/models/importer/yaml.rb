@@ -5,10 +5,10 @@ module Importer
       @app                 = app
       @yaml                = content
 
-      @import_translations = options[:import_translations] == "true"
-      @set_as_verified     = options[:set_as_verified]     == "true"
-      @set_as_translated   = options[:set_as_translated]   == "true"
       @use_as_phrase       = options[:use_as_phrase]       == "true"
+      @set_as_verified     = options[:set_as_verified]     == "true"
+      @import_translations = options[:import_translations] == "true"
+      @set_as_translated   = options[:set_as_translated]   == "true"
     end
 
     def import
