@@ -2,10 +2,10 @@
   .row.app.text-right
     .col-xs-12
       .btn-group.actions
-        = link_to I18n.t('shared.new_phrase'),            new_app_phrase_path(app),   class: 'btn btn-primary'
+        = link_to I18n.t('shared.export', type: nil),     app_export_path(app),       class: 'btn btn-info'
         = link_to I18n.t('shared.import', type: 'YAML'),  app_import_yaml_path(app),  class: 'btn btn-warning'
         = link_to I18n.t('shared.import', type: 'OBC'),   app_import_obc_path(app),   class: 'btn btn-warning'
-        = link_to I18n.t('shared.export', type: nil),     app_export_path(app),       class: 'btn btn-info'
+        = link_to I18n.t('shared.new_phrase'),            new_app_phrase_path(app),   class: 'btn btn-primary'
 
 .row.app
   .col-xs-12

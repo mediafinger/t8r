@@ -15,3 +15,13 @@
 
           %main
             = yield
+
+
+// The dark realms:
+:javascript
+
+  // TODO: extract to appropriate place:
+  $(document).ready(
+    // Activating Best In Place
+    function() { jQuery(".best_in_place").best_in_place(); }
+  );
