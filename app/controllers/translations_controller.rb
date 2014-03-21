@@ -21,7 +21,7 @@ class TranslationsController < BaseController
   end
 
   def ensure_sort
-    @default_sort = { done: :asc, updated_at: :asc }
+    @default_sort = { done: :asc, updated_at: :desc }
     super
   end
 
