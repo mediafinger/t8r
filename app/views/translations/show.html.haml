@@ -1,25 +1,49 @@
-%p
-  %strong App: [T]
-  = "#{@app.key} / #{@app.name}"
-%p
-  %strong Locale: [T]
-  = "#{@translation.locale.key} / #{@translation.locale.name}"
-%p
-  %strong Phrase-key: [T]
-  = link_to @translation.phrase.key, app_phrase_path(@app, @translation.phrase)
-%p
-  %strong Phrase-hint: [T]
-  = @translation.phrase.hint
-%p
-  %strong Phrase: [T]
-  = @translation.phrase.value
-%p
-  %strong Value: [T]
-  = @translation.value
-%p
-  %strong Done: [T]
-  - klass = @translation.done ? "translated" : "untranslated"
-  %span(class = klass)=  @translation.done
+%h1 Translation Details
+
+.form-horizontal
+  .form-group
+    .col-sm-2.control-label
+      App: [T]
+    .col-sm-10
+      %p.form-control-static= "#{@app.key} / #{@app.name}"
+
+  .form-group
+    .col-sm-2.control-label
+      Locale: [T]
+    .col-sm-10
+      %p.form-control-static= "#{@translation.locale.key} / #{@translation.locale.name}"
+
+  .form-group
+    .col-sm-2.control-label
+      Phrase-key: [T]
+    .col-sm-10
+      %p.form-control-static= link_to @translation.phrase.key, app_phrase_path(@app, @translation.phrase)
+
+  .form-group
+    .col-sm-2.control-label
+      Phrase-hint: [T]
+    .col-sm-10
+      %p.form-control-static= @translation.phrase.hint
+
+  .form-group
+    .col-sm-2.control-label
+      Phrase: [T]
+    .col-sm-10
+      %p.form-control-static= @translation.phrase.value
+
+  .form-group
+    .col-sm-2.control-label
+      Value: [T]
+    .col-sm-10
+      %p.form-control-static= @translation.value
+
+  .form-group
+    .col-sm-2.control-label
+      Done: [T]
+    .col-sm-10
+      %p.form-control-static
+        - klass = @translation.done ? "translated" : "untranslated"
+        %span(class = klass)=  @translation.done
 
 
 %h4 List of all translations [T]

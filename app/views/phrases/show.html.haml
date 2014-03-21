@@ -1,32 +1,56 @@
-%p
-  %strong App: [T]
-  = "#{@app.key} / #{@app.name}"
-%p
-  %strong Key: [T]
-  = @phrase.key
-%p
-  %strong Value: [T]
-  = best_in_place @phrase, :value, :type => :textarea, :path => app_phrase_path(@app, @phrase), nil: '<span class="translation-placeholder">...................</span>'
-%p
-  %strong Hint: [T]
-  = best_in_place @phrase, :hint, :type => :textarea, :path => app_phrase_path(@app, @phrase), nil: '<span class="translation-placeholder">....</span>'
-%p
-  %strong Done: [T]
-  - klass = @phrase.done ? "translated" : "untranslated"
-  %span(class = klass)= best_in_place @phrase, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_phrase_path(@app, @phrase)
-%p
-  %strong Archived: [T]
-  - klass = @phrase.hidden ? "active" : "archived"
-  %span(class = klass)= best_in_place @phrase, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_phrase_path(@app, @phrase)
-%p
-  %strong Copy all translations from an other key [T]
+%h1 Phrase Details
 
-  = form_tag copy_translations_from_app_phrase_path(@app, @phrase), :method => :post, :multipart => true do
-    .field
-      = label_tag :other_phrase_key
-      = text_field_tag :other_phrase_key
-    .field
-      = submit_tag 'Export [T]'
+.form-horizontal
+  .form-group
+    .col-sm-2.control-label
+      App: [T]
+    .col-sm-10
+      %p.form-control-static= "#{@app.key} / #{@app.name}"
+
+  .form-group
+    .col-sm-2.control-label
+      Key: [T]
+    .col-sm-10
+      %p.form-control-static= @phrase.key
+
+  .form-group
+    .col-sm-2.control-label
+      Value: [T]
+    .col-sm-10
+      %p.form-control-static
+        = best_in_place @phrase, :value, :type => :textarea, :path => app_phrase_path(@app, @phrase), nil: '<span class="translation-placeholder">...................</span>'
+
+  .form-group
+    .col-sm-2.control-label
+      Hint: [T]
+    .col-sm-10
+      %p.form-control-static
+        = best_in_place @phrase, :hint, :type => :textarea, :path => app_phrase_path(@app, @phrase), nil: '<span class="translation-placeholder">....</span>'
+
+  .form-group
+    .col-sm-2.control-label
+      Done: [T]
+    .col-sm-10
+      %p.form-control-static
+        - klass = @phrase.done ? "translated" : "untranslated"
+        %span(class = klass)= best_in_place @phrase, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_phrase_path(@app, @phrase)
+
+  .form-group
+    .col-sm-2.control-label
+      Archived: [T]
+    .col-sm-10
+      %p.form-control-static
+        - klass = @phrase.hidden ? "active" : "archived"
+        %span(class = klass)= best_in_place @phrase, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_phrase_path(@app, @phrase)
+
+  .form-group
+    .col-sm-2.control-label
+      Copy all translations from an other key [T]
+    .col-sm-10
+      = form_tag copy_translations_from_app_phrase_path(@app, @phrase), :method => :post, :multipart => true, class: 'form-inline' do
+        = label_tag :other_phrase_key, {}, class: 'sr-only'
+        = text_field_tag :other_phrase_key, nil, class: 'form-control', placeholder: 'Other key [T]'
+        = submit_tag 'Copy [T]', class: 'btn btn-default'
 
 
 

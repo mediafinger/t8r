@@ -1,19 +1,44 @@
-%p
-  %strong App: [T]
-  = "#{@app.key} / #{@app.name}"
-%p
-  %strong Name: [T]
-  = best_in_place @locale, :name, :type => :input, :path => app_locale_path(@app, @locale), nil: "<span class='translation-placeholder'>#{@locale.key}</span>"
-%p
-  %strong Key: [T]
-  = @locale.key
-%p
-  %strong Archived: [T]
-  - klass = @locale.hidden ? "active" : "archived"
-  %span(class = klass)= best_in_place @locale, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_locale_path(@app, @locale)
+%h1 Locale Details
+
+.form-horizontal
+  .form-group
+    .col-sm-2.control-label
+      App: [T]
+    .col-sm-10
+      %p.form-control-static= "#{@app.key} / #{@app.name}"
+
+  .form-group
+    .col-sm-2.control-label
+      Name: [T]
+    .col-sm-10
+      %p.form-control-static
+        = best_in_place @locale, :name, :type => :input, :path => app_locale_path(@app, @locale), inner_class: 'form-control glyphicon glyphicon-search', nil: "<span class='translation-placeholder'>#{@locale.key}</span>"
+
+  .form-group
+    .col-sm-2.control-label
+      Key: [T]
+    .col-sm-10
+      %p.form-control-static= @locale.key
+
+  .form-group
+    .col-sm-2.control-label
+      Archived: [T]
+    .col-sm-10
+      %p.form-control-static
+        - klass = @locale.hidden ? "active" : "archived"
+        %span(class = klass)= best_in_place @locale, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_locale_path(@app, @locale)
 
 
-
-%h4 List of all ARCHIVED phrases [T]
+%h3 Archived Phrases [T]
 = form_tag(app_locale_path(@app, @locale), method: :get) do
   = render 'phrases/list', phrases: @locale.phrases.archived.page(params[:page]), with_filter: false, can_archive: true
+
+
+// The dark realms:
+:javascript
+
+  // TODO: extract to appropriate place:
+  $(document).ready(
+    // Activating Best In Place
+    function() { jQuery(".best_in_place").best_in_place(); }
+  );
