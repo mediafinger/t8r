@@ -1,7 +1,7 @@
 %table.table
   %thead
     %tr
-      %td{:colspan => 3}= page_entries_info phrases
+      %td{:colspan => 2}= page_entries_info phrases
       %td{:colspan => 3}= will_paginate phrases
 
     %tr
@@ -10,7 +10,6 @@
       %th= I18n.t('shared.hint')
       %th= I18n.t('pages.translations')
       %th= I18n.t('shared.verified')
-      %th
 
 
   %tbody
@@ -32,10 +31,10 @@
         // Checkbox to mark phrase / master content as verified == ready for translation
         %td.dones
           = best_in_place phrase, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_phrase_path(@app, phrase)
-        %td
-          = link_to '', [@app, phrase], method: :delete, data: { confirm: 'Are you sure? [T]' }, class: 'glyphicon glyphicon-trash'
+        / %td
+        /   = link_to '', [@app, phrase], method: :delete, data: { confirm: 'Are you sure? [T]' }, class: 'glyphicon glyphicon-trash'
 
   %tfoot
     %tr
-      %td{:colspan => 3}= page_entries_info phrases
+      %td{:colspan => 2}= page_entries_info phrases
       %td{:colspan => 3}= will_paginate phrases
