@@ -2,23 +2,26 @@
   .container
     %p.text-right= link_to I18n.t('shared.new_locale'), new_app_locale_path(@app), class: 'btn btn-primary'
 
-  %table
-    %tr
-      %th= I18n.t('shared.name')
-      %th= I18n.t('shared.key')
-      %th= I18n.t('pages.phrases')
-      %th= I18n.t('pages.translations')
-
-    - @locales.each do |locale|
+  %table.table
+    %thead
       %tr
-        %td= link_to locale.name, app_locale_path(@app, locale)
-        %td= locale.key
-        %td= link_to "Add Phrase (#{@app.phrases.count}) [T]", new_app_phrase_path(@app)
-        %td= link_to "Untranslated (#{locale.untranslated_count}) [T]", app_translations_path(@app, filter: {locale_key: locale.key, done: false})
+        %th= I18n.t('shared.name')
+        %th= I18n.t('shared.key')
+        %th= I18n.t('pages.phrases')
+        %th= I18n.t('pages.translations')
 
-    %tr
-      %td{:colspan => 2}= page_entries_info @phrases
-      %td{:colspan => 2}= will_paginate @phrases
+    %tbody
+      - @locales.each do |locale|
+        %tr
+          %td= link_to locale.name, app_locale_path(@app, locale)
+          %td= locale.key
+          %td= link_to "Add Phrase (#{@app.phrases.count}) [T]", new_app_phrase_path(@app)
+          %td= link_to "Untranslated (#{locale.untranslated_count}) [T]", app_translations_path(@app, filter: {locale_key: locale.key, done: false})
+
+    %tfoot
+      %tr
+        %td{:colspan => 2}= page_entries_info @phrases
+        %td{:colspan => 2}= will_paginate @phrases
 
 - else
   .jumbotron

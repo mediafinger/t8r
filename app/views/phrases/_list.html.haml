@@ -1,39 +1,42 @@
-%table
-  %tr
-    %td{:colspan => 3}= page_entries_info phrases
-    %td{:colspan => 3}= will_paginate phrases
-
-  %tr
-    %th= I18n.t('shared.key')
-    %th= I18n.t('shared.phrase')
-    %th= I18n.t('shared.hint')
-    %th
-    %th= I18n.t('pages.translations')
-    %th= I18n.t('shared.verified')
-
-
-  - phrases.each do |phrase|
-    - verification_class = phrase.done ? "verified" : "unverified"
+%table.table
+  %thead
+    %tr
+      %td{:colspan => 3}= page_entries_info phrases
+      %td{:colspan => 3}= will_paginate phrases
 
     %tr
-      %td{class: ['keys', verification_class].join(' ')}
-        = link_to phrase.key, app_phrase_path(@app, phrase)
-      %td{class: ['phrases', verification_class].join(' ')}
-        = phrase.value
-      %td.hint
-        = phrase.hint
-      %td
-        = link_to I18n.t('shared.delete'), [@app, phrase], method: :delete, data: { confirm: 'Are you sure? [T]' }
+      %th= I18n.t('shared.key')
+      %th= I18n.t('shared.phrase')
+      %th= I18n.t('shared.hint')
+      %th
+      %th= I18n.t('pages.translations')
+      %th= I18n.t('shared.verified')
 
-      %td
-        - phrase.translations_ordered_by_locale.each do |translation|
-          - klass = translation.done ? "translated" : "untranslated"
-          %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
 
-      // Checkbox to mark phrase / master content as verified == ready for translation
-      %td.dones
-        = best_in_place phrase, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_phrase_path(@app, phrase)
+  %tbody
+    - phrases.each do |phrase|
+      - verification_class = phrase.done ? "verified" : "unverified"
 
-  %tr
-    %td{:colspan => 3}= page_entries_info phrases
-    %td{:colspan => 3}= will_paginate phrases
+      %tr
+        %td{class: ['keys', verification_class].join(' ')}
+          = link_to phrase.key, app_phrase_path(@app, phrase)
+        %td{class: ['phrases', verification_class].join(' ')}
+          = phrase.value
+        %td.hint
+          = phrase.hint
+        %td
+          = link_to I18n.t('shared.delete'), [@app, phrase], method: :delete, data: { confirm: 'Are you sure? [T]' }
+
+        %td
+          - phrase.translations_ordered_by_locale.each do |translation|
+            - klass = translation.done ? "translated" : "untranslated"
+            %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
+
+        // Checkbox to mark phrase / master content as verified == ready for translation
+        %td.dones
+          = best_in_place phrase, :done, :type => :checkbox, :collection => ["ఠ_ఠ", "✓"], :path => app_phrase_path(@app, phrase)
+
+  %tfoot
+    %tr
+      %td{:colspan => 3}= page_entries_info phrases
+      %td{:colspan => 3}= will_paginate phrases
