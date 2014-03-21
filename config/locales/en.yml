@@ -13,6 +13,7 @@ en:
     all: all
     delete: Delete
     done: done
+    hidden: hidden
     key: Key
     locale: Language
     phrase: Master Content
