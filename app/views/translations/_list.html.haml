@@ -29,15 +29,15 @@
       / Filtering
       %tr
         %td.keys
-          = text_field_tag "filter[phrase_key]",    @filter["phrase_key"], {  placeholder: I18n.t('views.placeholder_search_key'), size: 40 }
+          = text_field_tag "filter[phrase_key]",    @filter["phrase_key"], {  placeholder: I18n.t('views.placeholder_search_key'), class: 'form-control input-sm' }
         %td.phrases
-          = text_field_tag "filter[phrase_value]",  @filter["phrase_value"], {  placeholder: I18n.t('views.placeholder_search_term'), size: 50 }
+          = text_field_tag "filter[phrase_value]",  @filter["phrase_value"], {  placeholder: I18n.t('views.placeholder_search_term'), class: 'form-control input-sm' }
         %td.locales
-          = select_tag     "filter[locale_key]",    options_for_select(@locales, @filter["locale_key"]), { prompt: I18n.t('shared.all'), width: 6 }
+          = select_tag     "filter[locale_key]",    options_for_select(@locales, @filter["locale_key"]), { prompt: I18n.t('shared.all'), width: 6, class: 'form-control input-sm' }
         %td.translations
-          = text_field_tag "filter[value]",         @filter["value"], {  placeholder: I18n.t('views.placeholder_search_term'), size: 50 }
+          = text_field_tag "filter[value]",         @filter["value"], {  placeholder: I18n.t('views.placeholder_search_term'), class: 'form-control input-sm' }
         %td.dones
-          = select_tag     "filter[done]",          options_for_select([["ఠ_ఠ", false], ["✓", true]], @filter["done"]), { prompt: I18n.t('shared.all'), width: 6 }
+          = select_tag     "filter[done]",          options_for_select([["ఠ_ఠ", false], ["✓", true]], @filter["done"]), { prompt: I18n.t('shared.all'), class: 'form-control input-sm' }
 
 
     - else
