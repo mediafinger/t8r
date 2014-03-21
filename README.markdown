@@ -26,7 +26,7 @@ Like every normal Rails app. Just clone it, bundle, create the databases, migrat
 
 Then create an app (just provide a name and a unique key) and either add locales, phrases and translations by hand - or import them via existing YAML files (one locale at a time).
 
-I have not tested it yet, but it should run without any issue on a free heroku dyno.
+T8r runs without any issue on a free heroku dyno.
 
 
 ## Dependencies
@@ -34,6 +34,7 @@ I have not tested it yet, but it should run without any issue on a free heroku d
 T8r was written with Ruby 2.1.1 and Rails 4.0.3.
 
 It uses Puma as server and Postgres as database, but these could easily be exchanged to fit your infrastructure.
+The file imports are handled in the background by Sucker Punch - which runs in the same process as Rails.
 
 There are no external dependencies
 
@@ -50,7 +51,8 @@ Several might be added soon - but if you need to support another format, ping me
 A lot :) Just the most important features that I have in mind:
 
 *  JSON REST API for all important functionality, including bulk-imports
-*  Frontend design
+*  Frontend design needs to be finished
+*  Workflows have to be made more visible (archived / hidden / verified / done)
 *  Specs
 *  Import of files in other formats than YAML and tab separated key value files (e.g. Android and iOS)
 *  Export of files in other formats than YAML and tab separated key value files (e.g. Android and iOS)
