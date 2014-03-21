@@ -1,28 +1,27 @@
+- if with_actions
+  .row.app.text-right
+    .col-xs-12
+      .btn-group.actions
+        = link_to I18n.t('shared.new_phrase'),            new_app_phrase_path(app),   class: 'btn btn-primary'
+        = link_to I18n.t('shared.import', type: 'YAML'),  app_import_yaml_path(app),  class: 'btn btn-warning'
+        = link_to I18n.t('shared.import', type: 'OBC'),   app_import_obc_path(app),   class: 'btn btn-warning'
+        = link_to I18n.t('shared.export', type: nil),     app_export_path(app),       class: 'btn btn-info'
+
 .row.app
-  .col-xs-8
+  .col-xs-12
+
     %h3
-      = link_to app.name, app_path(app)
+      - if with_actions
+        = best_in_place app, :name, :type => :input, :path => app_path(app), nil: "<span class='translation-placeholder'>#{app.key}</span>"
+      - else
+        = link_to app.name, app_path(app)
       %small= app.key
+
     %p
-      = "#{app.phrases.count} phrases"
+      %em= "#{app.phrases.count} Phrases"
       - app.locales.order(key: :asc).each do |locale|
         - count = locale.untranslated_count
         - klass = (count > 0) ? "label-warning" : "label-default"
         - label = locale.key.dup
         - label << " (#{count})" if count > 0
         %span.label(class = klass)= link_to label, app_translations_path(app, filter: {locale_key: locale.key, done: false})
-
-  .col-xs-4.text-right
-    .btn-group.actions
-      = link_to I18n.t('shared.new_phrase'), new_app_phrase_path(app), class: 'btn btn-success'
-      .btn-group
-        %button.btn.btn-default.dropdown-toggle(type="button" id="dropdownMenu1" data-toggle="dropdown")
-          More…
-          %span.caret
-        %ul.dropdown-menu.text-left
-          %li= link_to "Edit [T]", edit_app_path(app)
-          %li.divider
-          %li= link_to 'Export [T]', app_export_path(app)
-          %li.divider
-          %li= link_to 'Import YAML [T]', app_import_yaml_path(app)
-          %li= link_to 'Import OBC [T]', app_import_obc_path(app)

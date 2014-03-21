@@ -5,7 +5,7 @@
   .container.apps
     - @apps.each do |app|
 
-      = render 'dashboard', app: app
+      = render 'dashboard', app: app, with_actions: false
 
 
   .container

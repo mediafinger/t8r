@@ -15,8 +15,10 @@ en:
     archived: Archived
     delete: Delete
     done: done
+    export: "Export %{type}"
     hidden: hidden
     hint: Hint
+    import: "Import %{type}"
     key: Key
     locale: Language
     name: Name
