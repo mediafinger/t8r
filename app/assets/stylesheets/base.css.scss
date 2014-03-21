@@ -10,6 +10,11 @@ td, th {
     padding: 0 0 3px 0;
     text-align: center;
   }
+  &.hiddens {
+    min-width: 40px;
+    padding: 0 0 3px 0;
+    text-align: left;
+  }
   &.keys {
     max-width: 280px;
     min-width: 280px;
@@ -50,11 +55,6 @@ td, th {
   border-radius:          $radius;
 }
 
-.translated {
-  margin: 0 2px 0 2px;
-  padding: 0 2px 0 2px;
-}
-
 .apps {
   margin: 2em 0;
 }
@@ -77,10 +77,33 @@ td, th {
   }
 }
 
+.hint {
+  color: #aaaaaa;
+  margin-left: 10px;
+}
+
+.translated {
+  margin: 0 2px 0 2px;
+  padding: 0 2px 0 2px;
+}
+
 .untranslated {
   @include border-radius(1em);
 
   background-color: #ffd0d0;
+  margin: 0 2px 0 2px;
+  padding: 0 2px 0 2px;
+}
+
+.verified {
+  margin: 0 2px 0 2px;
+  padding: 0 2px 0 2px;
+}
+
+.unverified {
+  @include border-radius(0.2em);
+
+  background-color: #ffe0e0;
   margin: 0 2px 0 2px;
   padding: 0 2px 0 2px;
 }

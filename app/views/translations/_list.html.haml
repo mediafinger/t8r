@@ -25,7 +25,6 @@
         = link_to I18n.t('shared.done'),         app_translations_path(@app, sort: {done: :asc})
         = link_to "▼",                          app_translations_path(@app, sort: {done: :desc})
 
-
     / Filtering
     %tr
       %td.keys
@@ -38,6 +37,7 @@
         = text_field_tag "filter[value]",         @filter["value"], {  placeholder: I18n.t('views.placeholder_search_term'), size: 50 }
       %td.dones
         = select_tag     "filter[done]",          options_for_select([["ఠ_ఠ", false], ["✓", true]], @filter["done"]), { prompt: I18n.t('shared.all'), width: 6 }
+
 
   - else
 
@@ -60,7 +60,9 @@
 
 
   - translations.each do |translation|
-    - klass = translation.done ? "translated" : "untranslated"
+    - translation_class = translation.done ? "translated" : "untranslated"
+    - verification_class = translation.phrase.done ? "verified" : "unverified"
+
     %tr
       // Optional (only used on Phrase#show) to hide / unhide translations
       - if can_archive == true
@@ -68,21 +70,20 @@
           = best_in_place translation, :hidden, :type => :checkbox, :collection => ["✗", "✓"], :path => app_translation_path(@app, translation)
 
       // Phrase key with link to translation's show view - in line below the hint
-      %td.keys
+      %td{class: ['keys', verification_class].join(' ')}
         = link_to translation.phrase.key, app_translation_path(@app, translation), { title: translation.phrase.key, rel: translation.phrase.key }
         %br
-        = translation.phrase.hint
+        %span.hint= translation.phrase.hint
 
       // Phrase value
-      %td.phrases
+      %td{class: ['phrases', verification_class].join(' ')}
         = translation.phrase.value
 
       // Locale (highlighted when untranslated) with link to edit translation
       %td.locales
-        %span(class = klass)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
+        %span(class = translation_class)= link_to translation.locale.key, edit_app_translation_path(@app, translation)
 
       // Translation value
-
       - if translation.reload.done && (translation.updated_at + 15.minutes) > Time.now.utc
         %td.translations.just_translated
           = best_in_place translation, :value, :type => :textarea, :path => app_translation_path(@app, translation), nil: '<span class="translation-placeholder">...................</span>', data: { confirm: "Translation was saved as:\n\n #{translation.value}\n\n less than 15 minutes ago. Do you really want to overwrite it?  [T]" }
