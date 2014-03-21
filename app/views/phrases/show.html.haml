@@ -3,33 +3,33 @@
 .form-horizontal
   .form-group
     .col-sm-2.control-label
-      App: [T]
+      = I18n.t('shared.app')
     .col-sm-10
       %p.form-control-static= "#{@app.key} / #{@app.name}"
 
   .form-group
     .col-sm-2.control-label
-      Key: [T]
+      = I18n.t('shared.key')
     .col-sm-10
       %p.form-control-static= @phrase.key
 
   .form-group
     .col-sm-2.control-label
-      Value: [T]
+      = I18n.t('shared.phrase')
     .col-sm-10
       %p.form-control-static
         = best_in_place @phrase, :value, :type => :textarea, :path => app_phrase_path(@app, @phrase), nil: '<span class="translation-placeholder">...................</span>'
 
   .form-group
     .col-sm-2.control-label
-      Hint: [T]
+      = I18n.t('shared.hint')
     .col-sm-10
       %p.form-control-static
         = best_in_place @phrase, :hint, :type => :textarea, :path => app_phrase_path(@app, @phrase), nil: '<span class="translation-placeholder">....</span>'
 
   .form-group
     .col-sm-2.control-label
-      Done: [T]
+      = I18n.t('shared.verified')
     .col-sm-10
       %p.form-control-static
         - klass = @phrase.done ? "translated" : "untranslated"
@@ -37,7 +37,7 @@
 
   .form-group
     .col-sm-2.control-label
-      Archived: [T]
+      = I18n.t('shared.archived')
     .col-sm-10
       %p.form-control-static
         - klass = @phrase.hidden ? "active" : "archived"
@@ -55,6 +55,6 @@
 
 
 
-%h4 List of all translations [T]
+%h4= I18n.t('pages.translations')
 = form_tag(app_phrase_path(@app, @phrase), method: :get) do
   = render 'translations/list', translations: @phrase.translations, with_filter: false, can_archive: true

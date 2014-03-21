@@ -3,26 +3,26 @@
 .form-horizontal
   .form-group
     .col-sm-2.control-label
-      App: [T]
+      = I18n.t('shared.app')
     .col-sm-10
       %p.form-control-static= "#{@app.key} / #{@app.name}"
 
   .form-group
     .col-sm-2.control-label
-      Name: [T]
+      = I18n.t('shared.name')
     .col-sm-10
       %p.form-control-static
         = best_in_place @locale, :name, :type => :input, :path => app_locale_path(@app, @locale), inner_class: 'form-control glyphicon glyphicon-search', nil: "<span class='translation-placeholder'>#{@locale.key}</span>"
 
   .form-group
     .col-sm-2.control-label
-      Key: [T]
+      = I18n.t('shared.key')
     .col-sm-10
       %p.form-control-static= @locale.key
 
   .form-group
     .col-sm-2.control-label
-      Archived: [T]
+      = I18n.t('shared.archived')
     .col-sm-10
       %p.form-control-static
         - klass = @locale.hidden ? "active" : "archived"

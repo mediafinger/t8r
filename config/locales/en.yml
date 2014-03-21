@@ -11,18 +11,25 @@ en:
     translations: Translations
   shared:
     all: all
+    app: App
+    archived: Archived
     delete: Delete
     done: done
     hidden: hidden
+    hint: Hint
     key: Key
     locale: Language
+    name: Name
+    new_app: New app
+    new_locale: New locale
+    new_phrase: New phrase
     phrase: Master Content
+    phrase_key: Phrase key
     translation: Translation
+    verified: verified
   views:
     placeholder_search_key: Search by key
     placeholder_search_term: Enter search term
     select_app: Select the app
     select_locale: Select the locale
     select_phrase: Select the phrase
-
-

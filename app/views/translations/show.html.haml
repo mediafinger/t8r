@@ -3,49 +3,49 @@
 .form-horizontal
   .form-group
     .col-sm-2.control-label
-      App: [T]
+      = I18n.t('shared.app')
     .col-sm-10
       %p.form-control-static= "#{@app.key} / #{@app.name}"
 
   .form-group
     .col-sm-2.control-label
-      Locale: [T]
+      = I18n.t('shared.locale')
     .col-sm-10
       %p.form-control-static= "#{@translation.locale.key} / #{@translation.locale.name}"
 
   .form-group
     .col-sm-2.control-label
-      Phrase-key: [T]
+      = I18n.t('shared.phrase_key')
     .col-sm-10
       %p.form-control-static= link_to @translation.phrase.key, app_phrase_path(@app, @translation.phrase)
 
   .form-group
     .col-sm-2.control-label
-      Phrase-hint: [T]
+      = I18n.t('shared.hint')
     .col-sm-10
       %p.form-control-static= @translation.phrase.hint
 
   .form-group
     .col-sm-2.control-label
-      Phrase: [T]
+      = I18n.t('shared.phrase')
     .col-sm-10
       %p.form-control-static= @translation.phrase.value
 
   .form-group
     .col-sm-2.control-label
-      Value: [T]
+      = I18n.t('shared.translation')
     .col-sm-10
       %p.form-control-static= @translation.value
 
   .form-group
     .col-sm-2.control-label
-      Done: [T]
+      = I18n.t('shared.done')
     .col-sm-10
       %p.form-control-static
         - klass = @translation.done ? "translated" : "untranslated"
         %span(class = klass)=  @translation.done
 
 
-%h4 List of all translations [T]
+%h4= I18n.t('pages.translations')
 = form_tag(app_translation_path(@app, @translation), method: :get) do
   = render 'list', translations: @translation.phrase.translations.active, with_filter: false, can_archive: false

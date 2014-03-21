@@ -14,7 +14,7 @@
 
   .col-xs-4.text-right
     .btn-group.actions
-      = link_to "Add Phrase [T]", new_app_phrase_path(app), class: 'btn btn-success'
+      = link_to I18n.t('shared.new_phrase'), new_app_phrase_path(app), class: 'btn btn-success'
       .btn-group
         %button.btn.btn-default.dropdown-toggle(type="button" id="dropdownMenu1" data-toggle="dropdown")
           More…

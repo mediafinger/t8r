@@ -4,12 +4,12 @@
     %td{:colspan => 3}= will_paginate phrases
 
   %tr
-    %th Key [T]
-    %th Value [T]
-    %th Hint [T]
-    %th Delete [T]
-    %th Translations [T]
-    %th Verified [T]
+    %th= I18n.t('shared.key')
+    %th= I18n.t('shared.phrase')
+    %th= I18n.t('shared.hint')
+    %th
+    %th= I18n.t('pages.translations')
+    %th= I18n.t('shared.verified')
 
 
   - phrases.each do |phrase|

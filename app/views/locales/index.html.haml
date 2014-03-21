@@ -1,13 +1,13 @@
 - if @locales.present?
   .container
-    %p.text-right= link_to "New locale [T]", new_app_locale_path(@app), class: 'btn btn-primary'
+    %p.text-right= link_to I18n.t('shared.new_locale'), new_app_locale_path(@app), class: 'btn btn-primary'
 
   %table
     %tr
-      %th Name [T]
-      %th Key [T]
-      %th Add Phrase [T]
-      %th Translate [T]
+      %th= I18n.t('shared.name')
+      %th= I18n.t('shared.key')
+      %th= I18n.t('pages.phrases')
+      %th= I18n.t('pages.translations')
 
     - @locales.each do |locale|
       %tr
@@ -26,4 +26,4 @@
       No locales [T]
     %p
       Maybe you would like to create one? [T]
-    %p= link_to "New locale [T]", new_app_locale_path(@app), class: 'btn btn-primary btn-lg'
+    %p= link_to I18n.t('shared.new_locale'), new_app_locale_path(@app), class: 'btn btn-primary btn-lg'

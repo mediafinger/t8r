@@ -1,6 +1,6 @@
 - if @apps.present?
   .container
-    %p.text-right= link_to "New app [T]", new_app_path, class: 'btn btn-primary'
+    %p.text-right= link_to I18n.t('shared.new_app'), new_app_path, class: 'btn btn-primary'
 
   .container.apps
     - @apps.each do |app|
@@ -19,4 +19,4 @@
   .jumbotron
     %h1 Welcome to T8r
     %p Create your first app to get started.
-    %p= link_to "New app [T]", new_app_path(@app), class: 'btn btn-primary btn-lg'
+    %p= link_to I18n.t('shared.new_app'), new_app_path(@app), class: 'btn btn-primary btn-lg'
