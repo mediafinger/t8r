@@ -15,12 +15,12 @@
 
   %tbody
     - phrases.each do |phrase|
-      - verification_class = phrase.done ? "verified" : "unverified"
+      - verification_class = phrase.done ? "verified" : "unverified-phrase"
 
-      %tr
-        %td{class: ['keys', verification_class].join(' ')}
+      %tr{class: verification_class}
+        %td.keys
           = link_to phrase.key, app_phrase_path(@app, phrase)
-        %td{class: ['phrases', verification_class].join(' ')}
+        %td.phrases
           = phrase.value
         %td.hint
           = phrase.hint
